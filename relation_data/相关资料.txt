@@ -1,25 +1,25 @@
-ÏîÄ¿×ÊÁÏ
+ï»¿é¡¹ç›®èµ„æ–™
 
-ÍÆËÍÏà¹Ø×ÊÁÏ:
+æ¨é€ç›¸å…³èµ„æ–™:
 
-Æ½Ì¨£º¸öÍÆÆ½Ì¨
-AppID£º 
+å¹³å°ï¼šä¸ªæ¨å¹³å°
+AppIDï¼š 
 u4PkFhl0OW6yIANu3JvuM9
-AppSecret£º 
+AppSecretï¼š 
 hxbLGYJtTG8bYkHN4RHmd6
-AppKey£º 
+AppKeyï¼š 
 UFqK0fVsum7P7ah6hKRcMA
-MasterSecret£º 
+MasterSecretï¼š 
 ioy5SGLML9AAaTlW1bMpT6
-Ó¦ÓÃ±êÊ¶£º 
+åº”ç”¨æ ‡è¯†ï¼š 
 net.qintalk.italker.push
 
-´æ´¢Æ½Ì¨£º
+å­˜å‚¨å¹³å°ï¼š
 
-Æ½Ì¨£º°¢ÀïOSS
-ÓòÃû£º
+å¹³å°ï¼šé˜¿é‡ŒOSS
+åŸŸåï¼š
 qintan-new.oss-cn-hongkong.aliyuncs.com
-AccessKeyID£º
+AccessKeyIDï¼š
 LTAIqfOVaubXECGx
-AccessKeySecret£º
+AccessKeySecretï¼š
 Sxi6lUIklDjFRayMWEVXuXV67H7yXJ
