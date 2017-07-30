@@ -2,7 +2,12 @@ package net.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.List;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by CLW on 2017/7/29.
@@ -18,7 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //初始化界面未开始前初始化窗口
         initWindow();
         if(initArgs(getIntent().getExtras())){
-            getContentLayoutId();
+            setContentView(getContentLayoutId());
             initWidget();
             initData();
         }
@@ -56,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void initWidget()
     {
-
+        ButterKnife.bind(this);
     }
 
     /**
@@ -94,8 +99,29 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
+
+    /**
+     *  点击物理键返回时，需要判断里面是否有要finish()
+     */
     @Override
     public void onBackPressed() {
+        //获得当前activity下的fragment
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        //判断fragments是否为空
+        if(fragments != null&&fragments.size()>0)
+        {
+            for(Fragment fragment:fragments)
+            {
+                //判断是否是我们能够处理的BasseFragment
+                if(fragment instanceof BaseFragment)
+                {
+                    //判断是否拦截了onBackPressed()
+                    if(((BaseFragment)fragment).onBackPressed())
+                        return;
+                }
+            }
+        }
+
         finish();
         super.onBackPressed();
     }
