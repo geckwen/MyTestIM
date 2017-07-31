@@ -1,3 +1,7 @@
 ﻿这是测试
+<<<<<<< HEAD
 这是测试version1.1
 这是测试version1.2
+=======
+这是测试version 1.1
+>>>>>>> version1.1
