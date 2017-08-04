@@ -14,13 +14,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.sun.tools.classfile.Opcode.Set;
+
 
 /**
  * 用户的Model,对应数据库
@@ -97,4 +97,133 @@ public class User {
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private HashSet<UserFollow> acceptedList=new HashSet<UserFollow>();
 	
+	//创建群表
+	@JoinColumn(name="ownId")
+	//定义为懒加载，默认加载User信息的时候,并不查询这个集合
+	//当访问groups.size()仅仅查询数量，不加载具体的group的信息
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private HashSet<Group> createGroupList=new HashSet<Group>();
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPortrait() {
+		return portrait;
+	}
+
+	public void setPortrait(String portrait) {
+		this.portrait = portrait;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getPushId() {
+		return pushId;
+	}
+
+	public void setPushId(String pushId) {
+		this.pushId = pushId;
+	}
+
+	public LocalDateTime getCreateDatetime() {
+		return createDatetime;
+	}
+
+	public void setCreateDatetime(LocalDateTime createDatetime) {
+		this.createDatetime = createDatetime;
+	}
+
+	public LocalDateTime getUpDatetime() {
+		return upDatetime;
+	}
+
+	public void setUpDatetime(LocalDateTime upDatetime) {
+		this.upDatetime = upDatetime;
+	}
+
+	public LocalDateTime getLastReceiverTime() {
+		return lastReceiverTime;
+	}
+
+	public void setLastReceiverTime(LocalDateTime lastReceiverTime) {
+		this.lastReceiverTime = lastReceiverTime;
+	}
+
+	public HashSet<UserFollow> getOriginList() {
+		return originList;
+	}
+
+	public void setOriginList(HashSet<UserFollow> originList) {
+		this.originList = originList;
+	}
+
+	public HashSet<UserFollow> getAcceptedList() {
+		return acceptedList;
+	}
+
+	public void setAcceptedList(HashSet<UserFollow> acceptedList) {
+		this.acceptedList = acceptedList;
+	}
+
+	public HashSet<Group> getCreateGroupList() {
+		return createGroupList;
+	}
+
+	public void setCreateGroupList(HashSet<Group> createGroupList) {
+		this.createGroupList = createGroupList;
+	}
+
+    
 }
