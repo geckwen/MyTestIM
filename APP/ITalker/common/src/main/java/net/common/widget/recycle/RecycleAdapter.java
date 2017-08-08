@@ -55,7 +55,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
         //设置View Tag 为ViewHoler,进行双向绑定
-        view.setTag(R.id.tag_recycle_holder,viewHolder);
+        view.setTag(R.id.tag_recycler_holder,viewHolder);
 
         //将view控件进行holde的绑定
         viewHolder.unbinder=ButterKnife.bind(viewHolder,view);
@@ -178,7 +178,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      */
     @Override
     public void onClick(View v) {
-        MyViewHolder viewHolder = (MyViewHolder) v.getTag(R.id.tag_recycle_holder);
+        MyViewHolder viewHolder = (MyViewHolder) v.getTag(R.id.tag_recycler_holder);
         if(adapterListenr != null)
         {
             //获得viewHolder适配器在view的坐标
@@ -194,7 +194,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      */
     @Override
     public boolean onLongClick(View v) {
-        MyViewHolder viewHolder = (MyViewHolder) v.getTag(R.id.tag_recycle_holder);
+        MyViewHolder viewHolder = (MyViewHolder) v.getTag(R.id.tag_recycler_holder);
         if(adapterListenr != null)
         {
             int position=viewHolder.getAdapterPosition();

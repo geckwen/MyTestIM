@@ -50,9 +50,8 @@ public  abstract class BaseFragment extends Fragment {
                 ((ViewGroup)(mRoot.getParent())).removeView(mRoot);
             }
         }
-        Intent intent=new Intent();
-        Bundle bundle=new Bundle();
-        intent.put
+
+
         return mRoot;
     }
 

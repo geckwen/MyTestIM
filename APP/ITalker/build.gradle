@@ -28,7 +28,7 @@ ext{
     versionName = '1.0.0'
     supportVersion = '25.3.1'
     bufferknifeVersion = '8.7.0'
-    glideVesion = '4.0.0'
+    glideVesion = '3.7.0'
     circycleImageView = '2.1.0'
     geniusVersion = '2.0.0'
 }
