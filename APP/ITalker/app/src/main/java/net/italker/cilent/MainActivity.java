@@ -1,10 +1,12 @@
 package net.italker.cilent;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,13 +19,20 @@ import com.bumptech.glide.request.target.ViewTarget;
 
 import net.common.BaseActivity;
 import net.common.widget.recycle.a.PortraitView;
+import net.italker.cilent.fragment.main.ActivityFragment;
+import net.italker.cilent.fragment.main.ContactFragment;
+import net.italker.cilent.fragment.main.GroupFragment;
 import net.italker.cilent.helper.NavHelper;
+import net.qiujuer.genius.ui.Ui;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 
 
 public class MainActivity extends BaseActivity implements
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        BottomNavigationView.OnNavigationItemSelectedListener,
+NavHelper.OnTabChangeListener<Integer>{
 
 
     @BindView(R.id.appbar)
@@ -43,7 +52,7 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.navigation)
     BottomNavigationView mnavigation;
 
-    NavHelper mnavHelper;
+    NavHelper<Integer> mnavHelper;
 
     @Override
     protected boolean initArgs(Bundle bundle) {
@@ -58,7 +67,11 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void initWidget() {
         super.initWidget();
-        mnavHelper=new NavHelper(mfragmentManager, containerId, mcontext);
+        mnavHelper=new NavHelper<Integer>(getSupportFragmentManager(),this,R.id.lay_container,this);
+        //添加各个fragment进去
+        mnavHelper.addTabs(R.id.action_home,new NavHelper.Tab<Integer>(ActivityFragment.class, R.string.action_home))
+        .addTabs(R.id.action_group,new NavHelper.Tab<Integer>(GroupFragment.class,R.string.action_group)).
+                addTabs(R.id.action_contact,new NavHelper.Tab<Integer>(ContactFragment.class,R.string.action_contact));
         //添加底部按钮监控
         mnavigation.setOnNavigationItemSelectedListener(this);
 
@@ -75,6 +88,10 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void initData() {
         super.initData();
+        //接管menu
+        Menu menu = mnavigation.getMenu();
+        //触发第一次的home
+        menu.performIdentifierAction(R.id.action_home,0);
     }
 
 
@@ -85,8 +102,45 @@ public class MainActivity extends BaseActivity implements
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         //转接点击流到工具类进行处理
         return mnavHelper.performOnClickMenu(item.getItemId());
+    }
+
+
+    /**
+     * NavHelper处理方法回调
+     * @param newTab 新的Tab
+     * @param oldTab 旧的Tab
+     */
+    @Override
+    public void onTabListener(NavHelper.Tab<Integer> newTab, NavHelper.Tab<Integer> oldTab) {
+             //取出我们额外的字段
+             mtextTile.setText(newTab.extra);
+
+            //对浮动按钮进行隐藏和显示动画
+             float transY = 0;
+             float rotation = 0;
+           if(Objects.equals(newTab.extra,R.string.title_home))
+           {
+               transY = Ui.dipToPx(getResources(),76);
+           }
+           else
+           {
+               if(Objects.equals(newTab.extra,R.string.action_group))
+               {
+                 mbtnAction.setImageResource(R.drawable.ic_group_add);
+                   rotation = -360;
+               }
+               else
+               {
+                   mbtnAction.setImageResource(R.drawable.ic_contact_add);
+                   rotation = 360;
+               }
+           }
+            //按钮切换动画
+           mbtnAction.animate()
+                   .rotation(rotation)
+                   .translationYBy(transY)
+                   .setDuration(480).start();
     }
 }

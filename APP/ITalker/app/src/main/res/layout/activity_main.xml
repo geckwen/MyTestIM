@@ -66,10 +66,12 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@id/lay_container"
         app:layout_anchorGravity="bottom|right"
+        android:translationY="@dimen/len_76"
         android:layout_marginBottom="@dimen/len_68"
         android:layout_marginEnd="@dimen/len_16"
         />
     <android.support.design.widget.BottomNavigationView
+        tools:targetApi="lollipop"
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_52"
