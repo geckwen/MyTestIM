@@ -20,10 +20,10 @@ import butterknife.Unbinder;
  * Created by CLW on 2017/7/30.
  */
 
-public abstract class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder>
-implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
-    private List<Data> mDatalist;
-    private AdapterListenr adapterListenr = null;
+public abstract class RecycleAdapter<T> extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder<T>>
+implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
+    private List<T> mDatalist;
+    private AdapterListener adapterListenr = null;
 
     public RecycleAdapter(){
             this.mDatalist=new ArrayList<>();
@@ -32,7 +32,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
     {
         this.mDatalist=mDatalist;
     }
-    public RecycleAdapter(AdapterListenr adapterListenr,List mDatalist)
+    public RecycleAdapter(AdapterListener adapterListenr,List mDatalist)
     {
            registerClickListener(adapterListenr);
             this.mDatalist=mDatalist;
@@ -44,13 +44,13 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      * @return viewHolde
      */
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
         //得到LayoutInlater用于把XML初始化为View
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         //把XML id为viewType的文件转化为一个root
         View view=layoutInflater.inflate(viewType,parent,false);
         //通过子类的方法定义一个自己的ViewHolder
-        MyViewHolder viewHolder=createrViewHolde(view,viewType);
+        MyViewHolder viewHolder=onCreaterViewHolde(view,viewType);
 
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
@@ -60,7 +60,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
         //将view控件进行holde的绑定
         viewHolder.unbinder=ButterKnife.bind(viewHolder,view);
         viewHolder.adapterCallBack=this;
-        return null;
+        return viewHolder;
     }
 
     /**
@@ -69,7 +69,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      * @param viewType 布局类型，就是XML的ID
      * @return 获得一个ViewHoler
      */
-    protected  abstract   MyViewHolder  createrViewHolde(View view,int viewType);
+    protected  abstract   MyViewHolder  onCreaterViewHolde(View view,int viewType);
 
     /**
      * 绑定一个数据到viewHolde上
@@ -79,14 +79,28 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //获得绑定的数据
-        Data data=(Data)mDatalist.get(position);
+        T data=(T)mDatalist.get(position);
         //绑定数据触发
         holder.bind(data);
     }
 
+    @Override
+    public void update(T data, MyViewHolder myViewHolder) {
+        //获取viewHolder坐标
+        int pos = myViewHolder.getAdapterPosition();
+        if(pos >= 0)
+        {
+            //进行数据移除和更新
+            mDatalist.remove(0);
+            mDatalist.add(pos,data);
+            //通知这个坐标的进行刷新
+            notifyItemChanged(pos);
+        }
+    }
+
     /**
      *获得布局的数量
-     * @return
+     * @return 返回数据的大小
      */
     @Override
     public int getItemCount() {
@@ -108,14 +122,14 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      * @param data 当前的数据
      * @return  XML文件的ID，用于创建ViewHolder
      */
-    protected  abstract  int getItemViewType(int position,Data data);
+    protected  abstract  int getItemViewType(int position,T data);
 
 
     /**
      * 添加数据Data
      * @param data 数据
      */
-    public void add(Data data)
+    public void add(T data)
     {
         mDatalist.add(data);
         notifyItemInserted(mDatalist.size()-1);
@@ -126,7 +140,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      * 添加一堆数据
      * @param datalist 一堆数据
      */
-    public void addDataList(Data... dataList)
+    public void addDataList(T... dataList)
     {
         if (dataList != null && dataList.length>0)
         {
@@ -165,10 +179,10 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      * 替换所有数据
      * @param dataList  替换数据
      */
-    public void replace(Data...dataList)
+    public void replace(List dataList)
     {
         mDatalist.clear();
-        Collections.addAll(mDatalist,dataList);
+        mDatalist.addAll(dataList);
         notifyDataSetChanged();
     }
 
@@ -208,7 +222,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
      * 注册监听器
      * @param adapterListenr 监听器
      */
-    public void registerClickListener(AdapterListenr adapterListenr)
+    public void registerClickListener(AdapterListener adapterListenr)
     {
         this.adapterListenr=adapterListenr;
     }
@@ -216,20 +230,20 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
     /**
      *  我们的自定义监听器主要是监听onClick与onLongClick
      */
-    public interface  AdapterListenr
+    public interface  AdapterListener<T>
     {
-        void onClick(RecycleAdapter.MyViewHolder holder,Data data);
-        void onLongClick(RecycleAdapter.MyViewHolder holder,Data data);
+        void onClick(RecycleAdapter.MyViewHolder holder,T data);
+        void onLongClick(RecycleAdapter.MyViewHolder holder,T data);
     }
     /**
      *  自定viewHolder
      */
-    public static abstract class  MyViewHolder extends RecyclerView.ViewHolder
+    public static abstract class  MyViewHolder<T> extends RecyclerView.ViewHolder
     {
 
         protected Unbinder unbinder;
         private  AdapterCallBack adapterCallBack;
-        private Data mData;
+        private T mData;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -239,7 +253,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
         /** 用于绑定数据的触发
          * @param data 绑定数据
          */
-        void bind(Data data)
+        void bind(T data)
         {
           this.mData = data;
             OnBind(data);
@@ -249,13 +263,13 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
          * 用于绑定数据的回调
          * @param data 绑定数据
          */
-        protected abstract void OnBind(Data data);
+        protected abstract void OnBind(T data);
 
 
         /** 自己对应的Data进行更新
          * @param data
          */
-        public void UpdataData(Data data)
+        public void updataData(T data)
         {
              if(adapterCallBack != null)
              {
@@ -263,5 +277,19 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack{
              }
         }
 
+    }
+
+    public static class  AdapterListenerImpl<T> implements AdapterListener<T>
+    {
+
+        @Override
+        public void onClick(MyViewHolder holder, T data) {
+
+        }
+
+        @Override
+        public void onLongClick(MyViewHolder holder, T data) {
+
+        }
     }
 }

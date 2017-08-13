@@ -7,6 +7,6 @@ import net.common.Data;
  * Created by CLW on 2017/7/30.
  */
 
-public interface AdapterCallBack {
-    void update(Data data, RecycleAdapter.MyViewHolder myViewHolder);
+public interface AdapterCallBack<T> {
+    void update(T data, RecycleAdapter.MyViewHolder myViewHolder);
 }
