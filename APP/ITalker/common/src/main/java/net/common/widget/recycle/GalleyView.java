@@ -1,11 +1,13 @@
 package net.common.widget.recycle;
 
+
 import android.content.Context;
 
 
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -28,10 +30,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.internal.ListenerClass;
+
 
 /**
- * TODO: document your custom view class.
+ * 选择图片GalleyView
+ *
  */
 public class GalleyView extends RecyclerView {
     private static final int LOADER_ID = 0x0100;
@@ -42,7 +45,7 @@ public class GalleyView extends RecyclerView {
     private LoaderCallBack mLoaderCallBack = new LoaderCallBack();
     private SelectListener mSelectlistener ;
     private List<Image> mImageList = new ArrayList<>();
-    private Adapter<Image> mAdapter = new Adapter<Image>();
+    private Adapter mAdapter = new Adapter();
 
     public GalleyView(Context context) {
         super(context);
@@ -81,7 +84,7 @@ public class GalleyView extends RecyclerView {
      * @param loaderManager
      * @return 任何一个LOADER_ID都可以用于销毁loader
      */
-    private int setUp(LoaderManager loaderManager,SelectListener mSelectlistener)
+    public int setUp(LoaderManager loaderManager, SelectListener mSelectlistener)
     {
         loaderManager.initLoader(LOADER_ID,null,mLoaderCallBack);
         this.mSelectlistener = mSelectlistener;
@@ -140,7 +143,7 @@ public class GalleyView extends RecyclerView {
      *得到选中图片的地址数组
      * @return  返回一组数组
      */
-    private String[] getSelectPath()
+    public  String[] getSelectPath()
     {
         String[] paths = new String[mImageList.size()];
         int index = 0;
@@ -226,12 +229,9 @@ public class GalleyView extends RecyclerView {
 
     /**
      * 适配器
-     * @param <Image>适配器用于Image
+     * @param
      */
-    private class Adapter<Image> extends RecycleAdapter<Image>{
-
-
-
+    private class Adapter extends RecycleAdapter<Image>{
 
         @Override
         protected MyViewHolder onCreaterViewHolde(View view, int viewType) {
@@ -316,7 +316,7 @@ public class GalleyView extends RecyclerView {
 
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-            //记载完成时
+            //加载完成时
             List mImageList = new ArrayList();
             if(data != null)
             {

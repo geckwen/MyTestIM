@@ -187,7 +187,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
     }
 
     /**
-     * j监听点击事件
+     * 监听点击事件
      * @param v 根布局
      */
     @Override
