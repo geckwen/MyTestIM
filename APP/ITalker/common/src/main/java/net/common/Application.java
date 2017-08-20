@@ -25,7 +25,7 @@ public class Application extends android.app.Application {
      * 获取单例Application
      * @return
      */
-    public static final Application getInstance()
+    public static  Application getInstance()
     {
         return mApplication;
     }

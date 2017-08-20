@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import net.common.Application;
 import net.italker.cilent.R;
 import net.italker.cilent.fragment.media.GalleyFragment;
+import net.qiujuer.genius.ui.widget.Button;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * A simple {@link Fragment} subclass.
  */
 public class PermissionFragment extends BottomSheetDialogFragment
-    implements EasyPermissions.PermissionCallbacks
+    implements EasyPermissions.PermissionCallbacks,View.OnClickListener
 {
     //权限回调标识
     private  static  final  int RC = 0x001;
@@ -55,7 +56,16 @@ public class PermissionFragment extends BottomSheetDialogFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View root = inflater.inflate(R.layout.fragment_permissionragment,container,false);
         refreshState(root);
+        //绑定按钮
+        Button btn= (Button) root.findViewById(R.id.btn_submit);
+        btn.setOnClickListener(this);
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshState(getView());
     }
 
     /**
@@ -64,15 +74,19 @@ public class PermissionFragment extends BottomSheetDialogFragment
      */
     private void refreshState(View root)
     {
+        if(root == null)
+        {
+            return ;
+        }
         Context  context = getContext();
         root.findViewById(R.id.im_state_permission_network)
                 .setVisibility( haveNetWork(context)? View.VISIBLE : View.GONE);
         root.findViewById(R.id.im_state_permission_read)
-                .setVisibility( haveNetWork(context)? View.VISIBLE : View.GONE);
+                .setVisibility( haveRead(context)? View.VISIBLE : View.GONE);
         root.findViewById(R.id.im_state_permission_write)
-                .setVisibility( haveNetWork(context)? View.VISIBLE : View.GONE);
+                .setVisibility( haveWrite(context)? View.VISIBLE : View.GONE);
         root.findViewById(R.id.im_state_permission_record_audio)
-                .setVisibility( haveNetWork(context)? View.VISIBLE : View.GONE);
+                .setVisibility( haveRecordAudio(context)? View.VISIBLE : View.GONE);
 
     }
 
@@ -134,7 +148,7 @@ public class PermissionFragment extends BottomSheetDialogFragment
 
     /**
      * 私有的show方法
-     * @param mFragmentManager
+     * @param mFragmentManager FragmentManager
      */
     private static void show(FragmentManager mFragmentManager)
     {
@@ -149,11 +163,11 @@ public class PermissionFragment extends BottomSheetDialogFragment
      */
     public static boolean haveAllPermission(Context context,FragmentManager mFragmentManager)
     {
-        boolean haveAll = haveNetWork(context) && haveRead(context) && haveWrite(context) && haveRecordAudio(context)
-        if ( !haveAll ) {
+        boolean haveAllPer = haveNetWork(context) && haveRead(context) && haveWrite(context) && haveRecordAudio(context);
+        if ( !haveAllPer ) {
             show(mFragmentManager);
         }
-        return  haveAll;
+        return  haveAllPer;
     }
 
     /**
@@ -167,7 +181,7 @@ public class PermissionFragment extends BottomSheetDialogFragment
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.RECORD_AUDIO
         };
         if(EasyPermissions.hasPermissions(getContext(),allPermission))
@@ -212,5 +226,16 @@ public class PermissionFragment extends BottomSheetDialogFragment
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //对应的参数,最后一个参数为自己
         EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_submit:
+                requestPem();
+                break;
+            default:
+                break;
+        }
     }
 }

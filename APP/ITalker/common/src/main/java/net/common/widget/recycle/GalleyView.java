@@ -258,9 +258,9 @@ public class GalleyView extends RecyclerView {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mImageView = (ImageView) findViewById(R.id.im_image);
-            mView = findViewById(R.id.view_shade);
-            mCheckBox = (CheckBox) findViewById(R.id.cb_select);
+            mImageView = (ImageView) itemView.findViewById(R.id.im_image);
+            mView = itemView.findViewById(R.id.view_shade);
+            mCheckBox = (CheckBox) itemView.findViewById(R.id.cb_select);
         }
 
         @Override
@@ -308,8 +308,10 @@ public class GalleyView extends RecyclerView {
             {
                 return new CursorLoader(getContext(),
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        IMAGE_PROJECTION,null,null,
-                        IMAGE_PROJECTION[2]+"DESC");
+                        IMAGE_PROJECTION,
+                        null,
+                        null,
+                        IMAGE_PROJECTION[2]+" DESC");
             }
             return null;
         }
@@ -317,7 +319,7 @@ public class GalleyView extends RecyclerView {
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
             //加载完成时
-            List mImageList = new ArrayList();
+            List<Image> mImageList = new ArrayList();
             if(data != null)
             {
                 int count = data.getCount();
@@ -326,7 +328,7 @@ public class GalleyView extends RecyclerView {
                     int indexId = data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]);
                     int indexPath = data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]);
                     int indexDate = data.getColumnIndexOrThrow(IMAGE_PROJECTION[2]);
-                    data.moveToNext();
+                    data.moveToFirst();
                     do{
                         int id = data.getInt(indexId);
                         String path = data.getString(indexPath);

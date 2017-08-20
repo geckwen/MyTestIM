@@ -9,7 +9,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by CLW on 2017/8/5.
  */
 
-public abstract class PortraitView extends CircleImageView {
+public  class PortraitView extends CircleImageView {
 
 
     public PortraitView(Context context) {

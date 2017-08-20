@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,11 +21,12 @@
             <net.common.widget.recycle.a.PortraitView
                 android:id="@+id/image_portrait"
                 android:layout_width="@dimen/len_40"
-                android:layout_margin="@dimen/len_4"
                 android:layout_height="@dimen/len_40"
+                android:layout_margin="@dimen/len_4"
+                android:foreground="@drawable/ic_touch_menu"
+                android:padding="@dimen/len_4"
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_portrait"
-                android:tint="@color/text_nav"
                 />
             <TextView
                 android:id="@+id/text_tile"
@@ -40,7 +42,7 @@
                 android:id="@+id/image_search"
                 android:layout_width="@dimen/len_40"
                 android:layout_height="@dimen/len_40"
-                android:layout_gravity="center_vertical|right"
+                android:layout_gravity="center_vertical|end"
                 android:layout_margin="@dimen/len_4"
                 android:src="@drawable/ic_search"
                 android:scaleType="centerInside"
@@ -62,27 +64,33 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@id/lay_container"
-        app:layout_anchorGravity="bottom|right"
-        android:translationY="@dimen/len_76"
+        android:layout_width="@dimen/len_52"
+        android:layout_height="@dimen/len_52"
         android:layout_marginBottom="@dimen/len_68"
         android:layout_marginEnd="@dimen/len_16"
+        android:padding="@dimen/len_20"
+        android:src="@drawable/ic_group_add"
+        android:tint="@color/white"
+        android:translationY="@dimen/len_76"
+        app:gBackgroundColor="@color/colorAccent"
+        app:layout_anchor="@id/lay_container"
+        app:layout_anchorGravity="bottom|end"
         />
     <android.support.design.widget.BottomNavigationView
-        tools:targetApi="lollipop"
+
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_52"
         android:layout_gravity="bottom"
         android:background="@color/white"
-        app:menu="@menu/navigation_items"
-        app:itemIconTint="@color/text_nav"
-        app:itemTextColor="@color/text_nav"
         android:elevation="@dimen/len_4"
         android:outlineProvider="bounds"
         android:translationZ="@dimen/len_8"
+        app:itemIconTint="@color/text_nav"
+        app:itemTextColor="@color/text_nav"
+        app:menu="@menu/navigation_items"
+        tools:targetApi="lollipop"
+        tools:visibility="invisible"
         />
 
 

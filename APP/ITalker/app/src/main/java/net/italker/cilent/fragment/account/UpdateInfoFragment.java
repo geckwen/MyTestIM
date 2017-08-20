@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 
 import com.bumptech.glide.Glide;
@@ -14,6 +15,8 @@ import com.yalantis.ucrop.UCrop;
 import net.common.Application;
 import net.common.BaseFragment;
 import net.common.widget.recycle.a.PortraitView;
+import net.factory.main.Factory;
+import net.factory.net.UploadHelper;
 import net.italker.cilent.R;
 import net.italker.cilent.fragment.media.GalleyFragment;
 
@@ -64,7 +67,7 @@ public class UpdateInfoFragment extends BaseFragment {
         // 收到从Activity传递过来的回调，然后取出其中的值进行图片加载
         // 如果是我能够处理的类型
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            // 通过UCrop得到对应的Uri
+            // 通过UCrop得到对应的Urix
             final Uri resultUri = UCrop.getOutput(data);
             if (resultUri != null) {
                 loadPortrait(resultUri);
@@ -81,5 +84,34 @@ public class UpdateInfoFragment extends BaseFragment {
                 .asBitmap()
                 .centerCrop()
                 .into(mPortrait);
+        final String localPath = resultUri.getPath();
+        Log.e("TAG",String.format("localPath:%s",localPath));
+        Factory.runAsync(new Runnable() {
+            @Override
+            public void run() {
+               String url = UploadHelper.uploadPortrait(localPath);
+                Log.e("TAG",String.format("url:%s",url));
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }
