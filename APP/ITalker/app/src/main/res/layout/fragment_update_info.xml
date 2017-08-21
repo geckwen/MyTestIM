@@ -7,11 +7,11 @@
 
     <net.common.widget.recycle.a.PortraitView
         android:id="@+id/im_portrait"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_width="@dimen/portraitMaxSize"
+        android:layout_height="@dimen/portraitMaxSize"
         android:layout_gravity="center"
-        android:src= "@color/colorAccent"
+        android:scaleType="centerCrop"
+        android:src="@color/colorAccent"
         />
 
 </FrameLayout>

@@ -59,10 +59,12 @@ public class NavHelper<T> {
         Tab<T> tab = tabs.get(menuId);
         if (tab != null)
         {
+                selectTab(tab);
                return  true;
         }
         return false;
     }
+
     private void selectTab(Tab<T> tab)
     {
         Tab<T> oldTab = null;

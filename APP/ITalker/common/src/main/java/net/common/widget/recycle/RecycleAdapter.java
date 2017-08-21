@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import  net.common.Data;
+
 import net.common.R;
 
 import java.util.ArrayList;
@@ -179,9 +179,11 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
      * 替换所有数据
      * @param dataList  替换数据
      */
-    public void replace(List dataList)
+    public void replace(List<T> dataList)
     {
         mDatalist.clear();
+        if(dataList == null || dataList.size() == 0)
+            return;
         mDatalist.addAll(dataList);
         notifyDataSetChanged();
     }

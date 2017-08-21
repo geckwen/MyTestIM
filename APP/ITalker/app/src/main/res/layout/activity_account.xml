@@ -3,9 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="Hello"
+        android:gravity="end|top"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_24"
+        />
     <FrameLayout
         android:id="@+id/lay_container"
         android:layout_width="match_parent"

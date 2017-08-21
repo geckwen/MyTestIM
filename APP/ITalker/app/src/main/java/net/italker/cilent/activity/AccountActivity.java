@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 
 import net.common.BaseActivity;
+import net.common.BaseFragment;
 import net.italker.cilent.R;
 import net.italker.cilent.fragment.account.UpdateInfoFragment;
 import net.italker.cilent.fragment.media.GalleyFragment;
@@ -17,7 +18,7 @@ import net.italker.cilent.fragment.media.GalleyFragment;
  */
 
 public class AccountActivity extends BaseActivity {
-    private GalleyFragment mGalleyFragment;
+    private  BaseFragment mUpdateInfoFragment;
 
     /**
      * 账户显示activity界面
@@ -36,15 +37,35 @@ public class AccountActivity extends BaseActivity {
     @Override
     public void initWidget() {
         super.initWidget();
-        mGalleyFragment = new GalleyFragment();
-       getSupportFragmentManager()
+        mUpdateInfoFragment = new UpdateInfoFragment();
+        getSupportFragmentManager()
                .beginTransaction()
-               .add(R.id.lay_container,mGalleyFragment)
+               .add(R.id.lay_container,mUpdateInfoFragment)
                .commit();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        mGalleyFragment.onActivityResult(requestCode,resultCode,data);
+        mUpdateInfoFragment.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }

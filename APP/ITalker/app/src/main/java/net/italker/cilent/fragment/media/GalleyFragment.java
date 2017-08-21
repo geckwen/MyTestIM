@@ -17,14 +17,13 @@ import android.view.Window;
 import net.common.tools.UiTools;
 import net.common.widget.recycle.GalleyView;
 import net.italker.cilent.R;
-import net.qiujuer.genius.ui.Ui;
 
 /**
  * 图片选择fragment
  */
 public class GalleyFragment extends BottomSheetDialogFragment implements GalleyView.SelectListener {
     private GalleyView mGalley;
-    private OnSelectListener mOnSelectListener;
+    private OnSelectListener mSelectListener;
 
     public GalleyFragment() {
         // Required empty public constructor
@@ -61,14 +60,14 @@ public class GalleyFragment extends BottomSheetDialogFragment implements GalleyV
     public void onSelectChange(int count) {
         //如果有选中照片则进行隐藏
         if(count>0)
-            dismiss();
-            if(mOnSelectListener != null)
+          dismiss();
+            if(mSelectListener != null)
             {       //得到全部选中的图片的路径
                     String[] paths = mGalley.getSelectPath();
                     //返回第一张
-                    mOnSelectListener.onSelectImage(paths[0]);
+                    mSelectListener.onSelectImage(paths[0]);
                     //取消和唤起者之间的应用，加快内存的回收
-                    mOnSelectListener=null;
+                    mSelectListener = null;
             }
     }
 
@@ -79,7 +78,7 @@ public class GalleyFragment extends BottomSheetDialogFragment implements GalleyV
      */
     public GalleyFragment registerListener(OnSelectListener mOnSelectListener)
     {
-        this.mOnSelectListener = mOnSelectListener;
+        mSelectListener = mOnSelectListener;
         return this;
     }
 
@@ -121,5 +120,20 @@ public class GalleyFragment extends BottomSheetDialogFragment implements GalleyV
             int dialogHeight = screenHeight - statusHeight ;
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,dialogHeight<=0 ? ViewGroup.LayoutParams.MATCH_PARENT:dialogHeight);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }

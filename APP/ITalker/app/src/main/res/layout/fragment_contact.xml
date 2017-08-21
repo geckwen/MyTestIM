@@ -9,8 +9,8 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="@dimen/len_20"
+        android:textSize="@dimen/len_80"
         android:textColor="@color/black"
-        android:text="@string/hello_blank_fragment" />
+        android:text="cONTACT" />
 
 </FrameLayout>

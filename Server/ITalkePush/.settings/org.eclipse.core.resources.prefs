@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//src/main/java/net/qintalk/italker/push/Appliacation.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/Apply.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/Group.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/GroupMember.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/Message.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/PushHistory.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/User.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/bean/db/UserFollow.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/provider/GsonProvider.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/provider/LocalDateTimeConverter.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/service/AccountService.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/utils/Hib.java=UTF-8
+encoding//src/main/java/net/qintalk/italker/push/utils/TextUtil.java=UTF-8

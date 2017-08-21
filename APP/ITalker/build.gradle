@@ -31,7 +31,7 @@ ext{
     glideVesion = '3.7.0'
     circycleImageView = '2.1.0'
     geniusVersion = '2.0.0'
-    uCropVersion = '2.2.0-native'
+    ucropVersion= '2.2.0-native'
     easyPMVersion = '0.3.0'
     ossVersion = '2.3.0'
 

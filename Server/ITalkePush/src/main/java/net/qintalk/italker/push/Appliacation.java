@@ -6,6 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
+import net.qintalk.italker.push.provider.GsonProvider;
+
 
 
 
@@ -16,11 +18,13 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 public class Appliacation extends ResourceConfig {
         public Appliacation()
         {   
-        	 // ×¢²áÂß¼­´¦Àí
+        	// æ³¨å†Œé€»è¾‘å¤„ç†çš„åŒ…å
         	packages("net.qintalk.italker.push.service");
-        	//×¢²ájson½âÎöÆ÷
-        	register(JacksonJsonProvider.class);
-        	//×¢²áÈÕÖ¾¼ÇÂ¼
+        	// æ³¨å†ŒJsonè§£æå™¨
+        	//register(JacksonJsonProvider.class);
+        	//æ³¨å†ŒGsonè§£æå™¨
+        	register(GsonProvider.class);
+        	// æ³¨å†Œæ—¥å¿—æ‰“å°è¾“å‡º
         	register(Logger.class);
         }
 }
