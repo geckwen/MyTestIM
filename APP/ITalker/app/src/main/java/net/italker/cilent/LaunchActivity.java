@@ -19,7 +19,11 @@ public class LaunchActivity extends BaseActivity {
         if(PermissionFragment.haveAllPermission(this,getSupportFragmentManager()))
         {
             MainActivity.show(this);
+<<<<<<< HEAD
 
+=======
+            finish();
+>>>>>>> first hibernate and web connect succesed
         }
 
     }
