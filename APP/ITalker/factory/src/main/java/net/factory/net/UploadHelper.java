@@ -10,7 +10,14 @@ import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvider;
 
+<<<<<<< HEAD
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
+=======
+<<<<<<< HEAD
+=======
+import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
+>>>>>>> first hibernate and web connect succesed
+>>>>>>> temp
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 
@@ -32,14 +39,31 @@ public class UploadHelper {
     private static  final String ACCESS_KEY_ID ="LTAIhf7PgYEmByoR";
     private static  final String ACCESS_KEY_SECRET ="YjIdCJ2eCvptsHVDktuNrC6PSPwdeO";
     private static final  String BUCKT_NAME ="qintan-new";
+<<<<<<< HEAD
     private static final String SECURITY_TOKEN ="CAES7QIIARKAAZPlqaN9ILiQZPS+JDkS/GSZN45RLx4YS/p3OgaUC+oJl3XSlbJ7StKpQ";
+=======
+<<<<<<< HEAD
+    public String SecurityToken ="";
+=======
+    private static final String SECURITY_TOKEN ="CAES7QIIARKAAZPlqaN9ILiQZPS+JDkS/GSZN45RLx4YS/p3OgaUC+oJl3XSlbJ7StKpQ";
+>>>>>>> first hibernate and web connect succesed
+>>>>>>> temp
 
     public static OSS getCilnet()
     {
 
         // 明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考访问控制章节
+<<<<<<< HEAD
        //可以等后面配置尝试
         //OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(ACCESS_KEY_ID, ACCESS_KEY_SECRET, SECURITY_TOKEN);
+=======
+<<<<<<< HEAD
+       //可以等后面配置尝试 OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(AccessKeyID, AccessKeySecret, "<StsToken.SecurityToken>");
+=======
+       //可以等后面配置尝试
+        //OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(ACCESS_KEY_ID, ACCESS_KEY_SECRET, SECURITY_TOKEN);
+>>>>>>> first hibernate and web connect succesed
+>>>>>>> temp
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(ACCESS_KEY_ID,ACCESS_KEY_SECRET);
         OSS oss = new OSSClient(Factory.getApp(), ENDPOINT, credentialProvider);
         return  oss;

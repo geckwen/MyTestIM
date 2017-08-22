@@ -1,25 +1,22 @@
 package net.qintalk.italker.push.bean.api.account;
 
+import java.awt.datatransfer.StringSelection;
+
+import org.springframework.remoting.RemoteTimeoutException;
+
 import com.google.gson.annotations.Expose;
-<<<<<<< HEAD
-=======
-import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.PrivateKeyResolver;
 
 import net.qintalk.italker.push.utils.TextUtil;
->>>>>>> temp
 
-public class RegisterModel {
+public class LoginModel {
+	//用户名
 	@Expose
 	private String account;
+	//密码
 	@Expose
 	private String password;
 	@Expose
-	private String name;
-<<<<<<< HEAD
-=======
-	@Expose
 	private String pushId;
->>>>>>> temp
 	public String getAccount() {
 		return account;
 	}
@@ -32,27 +29,23 @@ public class RegisterModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-<<<<<<< HEAD
-=======
+	
 	public String getPushId() {
 		return pushId;
 	}
 	public void setPushId(String pushId) {
 		this.pushId = pushId;
 	}
-	public static boolean checkisNull(RegisterModel model)
+	/**
+	 * 判断传入的model是否为空并且里面的值是否为空
+	 * @param model 登陆model
+	 * @return 都不为空为true,其中一个为空为false
+	 */
+	public static boolean checkisNull(LoginModel model)
 	{
 		return model!=null
 				&&TextUtil.StringNotEmpty(model.getAccount())
-				&&TextUtil.StringNotEmpty(model.getPassword())
-				&&TextUtil.StringNotEmpty(model.getName());
+				&&TextUtil.StringNotEmpty(model.getPassword());
 	}
->>>>>>> temp
 	
 }

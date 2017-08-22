@@ -2,8 +2,17 @@ package net.qintalk.italker.push.bean.card;
 
 import java.time.LocalDateTime;
 
+<<<<<<< HEAD
 import com.google.gson.annotations.Expose;
 
+=======
+
+
+import com.google.gson.annotations.Expose;
+
+import net.qintalk.italker.push.bean.db.User;
+
+>>>>>>> temp
 
 
 /**
@@ -46,6 +55,21 @@ public class UserCard {
     //我与userCard的关系是怎么样的.
     private boolean isfollow;
     
+<<<<<<< HEAD
+=======
+	public UserCard(final User user)
+	{
+		this.id = user.getId();
+		this.name = user.getName();
+		this.phone = user.getPhone();
+		this.portrait = user.getPortrait();
+		this.description = user.getDescription();
+		this.updateAt = user.getUpdateAt();
+		this.sex = user.getSex();
+		
+		
+	}
+>>>>>>> temp
 
 	public String getId() {
 		return id;
