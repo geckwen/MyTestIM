@@ -1,12 +1,10 @@
 package net.qintalk.italker.push.bean.api.account;
 
 import com.google.gson.annotations.Expose;
-<<<<<<< HEAD
-=======
-import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.PrivateKeyResolver;
+
 
 import net.qintalk.italker.push.utils.TextUtil;
->>>>>>> temp
+
 
 public class RegisterModel {
 	@Expose
@@ -15,11 +13,9 @@ public class RegisterModel {
 	private String password;
 	@Expose
 	private String name;
-<<<<<<< HEAD
-=======
 	@Expose
 	private String pushId;
->>>>>>> temp
+
 	public String getAccount() {
 		return account;
 	}
@@ -38,8 +34,7 @@ public class RegisterModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-<<<<<<< HEAD
-=======
+
 	public String getPushId() {
 		return pushId;
 	}
@@ -53,6 +48,5 @@ public class RegisterModel {
 				&&TextUtil.StringNotEmpty(model.getPassword())
 				&&TextUtil.StringNotEmpty(model.getName());
 	}
->>>>>>> temp
-	
+
 }

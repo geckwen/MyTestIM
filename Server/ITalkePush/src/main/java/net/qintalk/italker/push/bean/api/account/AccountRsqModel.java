@@ -1,17 +1,25 @@
 package net.qintalk.italker.push.bean.api.account;
 
+import com.google.gson.annotations.Expose;
+
 import net.qintalk.italker.push.bean.card.UserCard;
 import net.qintalk.italker.push.bean.db.User;
 
 public class AccountRsqModel {
+	
 	//基本信息
+	@Expose
 	private UserCard userCard;
+	
 	//用户登录名
+	@Expose
 	private String account;
 	//当前登录获得一个Token
 	//通过Token来获取用户信息
+	@Expose
 	private String token;
 	//是否绑定设备
+	@Expose
 	private boolean isBind;
 	
 	public AccountRsqModel(User user)

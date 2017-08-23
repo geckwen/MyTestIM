@@ -1,6 +1,5 @@
 package net.qintalk.italker.push.factory;
 
-<<<<<<< HEAD
 import org.hibernate.Session;
 
 import net.qintalk.italker.push.bean.db.User;
@@ -8,21 +7,11 @@ import net.qintalk.italker.push.utils.Hib;
 import net.qintalk.italker.push.utils.Hib.Query;
 import net.qintalk.italker.push.utils.TextUtil;
 
-public class UserFactory {
-=======
 import java.util.List;
 import java.util.UUID;
 
-import javax.jws.soap.SOAPBinding.Use;
-
-import org.hibernate.Session;
-
-
-import net.qintalk.italker.push.bean.db.User;
-import net.qintalk.italker.push.utils.Hib;
-import net.qintalk.italker.push.utils.Hib.Query;
 import net.qintalk.italker.push.utils.Hib.QueryOnly;
-import net.qintalk.italker.push.utils.TextUtil;
+
 
 /**
  * 用户操作
@@ -41,15 +30,14 @@ public class UserFactory {
 			@Override
 			public User query(Session session) {
 				// session进行查询操作
-				User user =(User)session.createQuery("from User where phone=:token")
+				User user =(User)session.createQuery("from User where token=:token")
 				.setParameter("token", token)
 				.uniqueResult();
 				return user;
 			}
 		});
 	}
->>>>>>> temp
-	
+
 	/**
 	 * 查询账号是否存在	
 	 * @param phone 账号
@@ -89,8 +77,6 @@ public class UserFactory {
 	}
 	
 	/**
-<<<<<<< HEAD
-=======
 	 * 登陆查询操作
 	 * @param account 用户账户
 	 * @param password	用户密码
@@ -121,7 +107,6 @@ public class UserFactory {
 	}
 	
 	/**
->>>>>>> temp
 	 * 用户注册
 	 * 注册成功后返回一个user,并对数据库写操作
 	 * @param account	用户帐号
@@ -133,8 +118,6 @@ public class UserFactory {
 		account = account.trim();
 		//进行MD5操作
 		password = passwordMd5(password);
-<<<<<<< HEAD
-=======
 		User user = createUser(account, password, name);
 		if(user !=null)
 		{
@@ -176,34 +159,17 @@ public class UserFactory {
 	 */
 	private static User createUser(String account,String password,String name) 
 	{
->>>>>>> temp
+
 		User user = new User();
 		user.setPassword(password);
 		user.setName(name);
 		//用户账号
 		user.setPhone(account);
-<<<<<<< HEAD
-		//开启一个会话
-		Session session = Hib.session();
-		//开启事务
-		session.beginTransaction();
-		try {
-			session.save(user);
-			//提交事务
-			session.getTransaction().commit();
-			return user;
-		} catch (Exception e) {
-			//事务没有成功提交，回滚之前状态
-			session.getTransaction().rollback();
-			return null;
-			}			
-	}
-	
-=======
 		return Hib.query(new Query<User>() {
 			@Override
 			public User query(Session session) {
-				 return (User)session.save(user);
+				 session.save(user);
+				 return user;
 				
 			}
 		});
@@ -224,7 +190,7 @@ public class UserFactory {
 			public void query(Session session) {
 				// TODO Auto-generated method stub
 			@SuppressWarnings("unchecked")
-			List<User> userList=(List<User>)session.createQuery("from User where lower(pushId)=:pushId and Id!=userID")
+			List<User> userList=(List<User>)session.createQuery("from User where lower(pushId)=:pushId and Id!=:userID")
 				.setParameter("pushId", pushId.toLowerCase())
 				.setParameter("userID", user.getId())
 				.list();
@@ -251,13 +217,7 @@ public class UserFactory {
 			}
 			//进行更新设备ID
 			user.setPushId(pushId);
-			return Hib.query(new Query<User>() {
-				@Override
-				public User query(Session session) {
-					 session.saveOrUpdate(user);
-					 return user;	
-				}
-			});
+			return updateUser(user);
 			
 		}
 		
@@ -266,11 +226,27 @@ public class UserFactory {
 	}
 	
 	/**
+	 * 进行用户信息更新
+	 * @param user 用户
+	 * @return 返回一个更新后的用户
+	 */
+	public static User updateUser(User user)
+	{
+		return Hib.query(new Query<User>() {
+			@Override
+			public User query(Session session) {
+				// TODO 进行数据更新
+				session.saveOrUpdate(user);
+				return user;
+			}
+		});
+	}
+	/**
 	 * 进行MD5加密和Base64加密
 	 * @param password
 	 * @return
 	 */
->>>>>>> temp
+
 	private static String passwordMd5(String password)
 	{
 		//去除头尾空格
@@ -280,4 +256,6 @@ public class UserFactory {
 		//再进行一次对称的BASE64的加密
 		return TextUtil.encodeBase64(passwordMd5);
 	}
+
+	
 }

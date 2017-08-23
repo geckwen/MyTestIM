@@ -57,18 +57,18 @@ public class TextUtil {
     public static String toJson(Object obj) {
         return GsonProvider.getGson().toJson(obj);
     }
-<<<<<<< HEAD
-=======
+
     
     /**
      * 用于判定字符是否为空
      * @param str
      * @return
      */
-    public static boolean StringNotEmpty(String str)
+   
+	public static boolean StringNotEmpty(String str)
     {
-    	return str != null || str.trim().length() > 0;
+    	return str != null && str.trim().length() > 0;
     }
->>>>>>> temp
+
 }
 
