@@ -1,8 +1,9 @@
-package net.common;
+package net.common.app;
 
 import android.os.SystemClock;
 import android.widget.Toast;
 
+import net.common.tools.UiShow;
 import net.qiujuer.genius.kit.handler.Run;
 import net.qiujuer.genius.kit.handler.runable.Action;
 
@@ -92,12 +93,8 @@ public class Application extends android.app.Application {
      */
     public static void showToast(final String  msg)
     {
-        Run.onUiAsync(new Action() {
-            @Override
-            public void call() {
-                Toast.makeText(mApplication,msg,Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        UiShow.showString(msg);
     }
 
     /**

@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.common.Application;
+import net.common.app.Application;
 import net.italker.cilent.R;
 import net.italker.cilent.fragment.media.GalleyFragment;
 import net.qiujuer.genius.ui.widget.Button;

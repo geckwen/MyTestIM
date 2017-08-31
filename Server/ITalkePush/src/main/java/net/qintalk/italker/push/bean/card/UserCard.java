@@ -1,5 +1,6 @@
 package net.qintalk.italker.push.bean.card;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 

@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import java.io.Serializable;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.HashSet;

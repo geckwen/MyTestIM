@@ -1,4 +1,4 @@
-package net.italker.cilent;
+package net.italker.cilent.activity;
 
 
 import android.content.Context;
@@ -19,9 +19,9 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 
-import net.common.BaseActivity;
+import net.common.app.BaseActivity;
 import net.common.widget.recycle.a.PortraitView;
-import net.italker.cilent.activity.AccountActivity;
+import net.italker.cilent.R;
 import net.italker.cilent.fragment.assist.PermissionFragment;
 import net.italker.cilent.fragment.main.ActivityFragment;
 import net.italker.cilent.fragment.main.ContactFragment;
@@ -94,11 +94,11 @@ NavHelper.OnTabChangeListener<Integer>{
                 .load(R.drawable.bg_src_morning)
                 .centerCrop()
                 .into(new ViewTarget<View,GlideDrawable>(mLayAppbar) {
-            @Override
-            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                this.view.setBackground(resource.getCurrent());
-            }
-        });
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        this.view.setBackground(resource.getCurrent());
+                    }
+                });
         //权限是否全部获取
         PermissionFragment.haveAllPermission(this,getSupportFragmentManager());
 

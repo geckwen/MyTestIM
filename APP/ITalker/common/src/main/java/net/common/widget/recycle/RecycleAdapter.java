@@ -30,7 +30,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
     }
     public RecycleAdapter(List mDatalist)
     {
-        this.mDatalist=mDatalist;
+        this.mDatalist = mDatalist;
     }
     public RecycleAdapter(AdapterListener adapterListenr,List mDatalist)
     {
@@ -91,7 +91,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
         if(pos >= 0)
         {
             //进行数据移除和更新
-            mDatalist.remove(0);
+            mDatalist.remove(pos);
             mDatalist.add(pos,data);
             //通知这个坐标的进行刷新
             notifyItemChanged(pos);

@@ -1,4 +1,4 @@
-package net.italker.cilent.fragment.account;
+package net.italker.cilent.fragment.user;
 
 
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.yalantis.ucrop.UCrop;
 
-import net.common.Application;
-import net.common.BaseFragment;
+import net.common.app.Application;
+import net.common.app.BaseFragment;
 import net.common.widget.recycle.a.PortraitView;
 import net.factory.main.Factory;
 import net.factory.net.UploadHelper;

@@ -1,6 +1,7 @@
 package net.italker.cilent;
 
-import net.common.BaseActivity;
+import net.common.app.BaseActivity;
+import net.italker.cilent.activity.MainActivity;
 import net.italker.cilent.fragment.assist.PermissionFragment;
 
 /**
@@ -19,15 +20,7 @@ public class LaunchActivity extends BaseActivity {
         if(PermissionFragment.haveAllPermission(this,getSupportFragmentManager()))
         {
             MainActivity.show(this);
-<<<<<<< HEAD
             finish();
-=======
-<<<<<<< HEAD
-
-=======
-            finish();
->>>>>>> first hibernate and web connect succesed
->>>>>>> temp
         }
 
     }

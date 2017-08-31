@@ -9,7 +9,7 @@ public class AccountRsqModel {
 	
 	//基本信息
 	@Expose
-	private UserCard userCard;
+	private UserCard user;
 	
 	//用户登录名
 	@Expose
@@ -28,16 +28,18 @@ public class AccountRsqModel {
 		this(user, false);
 	}
 	public AccountRsqModel(User user,boolean isBind){
-		this.userCard = new UserCard(user);
+		this.user = new UserCard(user);
 		this.account = user.getPhone();
 		this.token = user.getToken();
 		this.isBind = isBind;
 	}
-	public UserCard getUserCard() {
-		return userCard;
+	
+	
+	public UserCard getUser() {
+		return user;
 	}
-	public void setUserCard(UserCard userCard) {
-		this.userCard = userCard;
+	public void setUser(UserCard user) {
+		this.user = user;
 	}
 	public String getAccount() {
 		return account;

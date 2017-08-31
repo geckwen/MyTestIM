@@ -45,34 +45,34 @@ public class AuthRequestFilter implements ContainerRequestFilter {
 			if(user!=null)
 			{
 				//当前请求上下文
-//				requestContext.setSecurityContext(new SecurityContext() {
-//					
-//					@Override
-//					public boolean isUserInRole(String role) {
-//						// TODO 可以在这里写入用户权限,role是权限名
-//						return true;
-//					}
-//					
-//					@Override
-//					public boolean isSecure() {
-//						// TODO 默认即可，https
-//						return false;
-//					}
-//					
-//					@Override
-//					public Principal getUserPrincipal() {
-//						// TODO User实现Principal接口
-//						return user;
-//					}
-//					
-//					@Override
-//					public String getAuthenticationScheme() {
-//						// TODO Auto-generated method stub
-//						return null;
-//					}
-//				});
+				requestContext.setSecurityContext(new SecurityContext() {
+					
+					@Override
+					public boolean isUserInRole(String role) {
+						// TODO 可以在这里写入用户权限,role是权限名
+						return true;
+					}
+					
+					@Override
+					public boolean isSecure() {
+						// TODO 默认即可，https
+						return false;
+					}
+					
+					@Override
+					public Principal getUserPrincipal() {
+						// TODO User实现Principal接口
+						return user;
+					}
+					
+					@Override
+					public String getAuthenticationScheme() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+				});
 //				//写入上下文就拦截
-			LocalUser.addLocalUser(user);
+//			LocalUser.addLocalUser(user);
 			return;
 			}
 		}

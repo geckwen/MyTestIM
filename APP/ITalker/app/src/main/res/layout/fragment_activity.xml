@@ -5,12 +5,10 @@
     tools:context="net.italker.cilent.fragment.main.ActivityFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <net.common.widget.recycle.GalleyView
+        android:id="@+id/galleryView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/len_80"
-        android:textColor="@color/red_500"
-        android:text="activity" />
+        android:layout_height="wrap_content">
+    </net.common.widget.recycle.GalleyView>
 
 </FrameLayout>

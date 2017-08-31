@@ -1,4 +1,4 @@
-package net.common;
+package net.common.app;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

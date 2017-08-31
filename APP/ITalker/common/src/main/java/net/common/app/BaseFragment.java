@@ -1,4 +1,4 @@
-package net.common;
+package net.common.app;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import butterknife.Unbinder;
  * Created by CLW on 2017/7/29.
  */
 
-public  abstract class BaseFragment extends Fragment {
+public  abstract class BaseFragment extends Fragment  {
     protected  View mRoot;
     protected Unbinder mRootBinder;
 

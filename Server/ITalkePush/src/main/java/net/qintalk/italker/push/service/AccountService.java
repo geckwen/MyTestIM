@@ -27,7 +27,7 @@ import net.qintalk.italker.push.utils.TextUtil;
  * @author CLW
  */
 
-// 127.0.0.1/api/account/
+// 127.0.0.1/ITalkePush/api/account/
 @Path("/account")
 public class AccountService extends BaseService {
 	
@@ -64,6 +64,11 @@ public class AccountService extends BaseService {
 
 
 
+	/**
+	 * // 127.0.0.1/api/account/register
+	 * @param model
+	 * @return
+	 */
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
