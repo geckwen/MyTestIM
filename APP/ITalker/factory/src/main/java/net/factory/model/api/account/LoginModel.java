@@ -1,24 +1,21 @@
 package net.factory.model.api.account;
 
 /**
- * 注册信息
- * Created by CLW on 2017/8/28.
+ * 登陆信息
+ * Created by CLW on 2017/9/7.
  */
 
-public class RegisterModel {
+public class LoginModel {
+    //用户名
     private String account;
+    //用户密码
     private String password;
-    private String name;
+    //用户设备ID
     private String pushId;
 
-    public RegisterModel(String account, String password, String name) {
-        this(account,password,name,null);
-    }
-
-    public RegisterModel(String account, String password, String name, String pushId) {
+    public LoginModel(String account, String password, String pushId) {
         this.account = account;
         this.password = password;
-        this.name = name;
         this.pushId = pushId;
     }
 
@@ -36,14 +33,6 @@ public class RegisterModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPushId() {

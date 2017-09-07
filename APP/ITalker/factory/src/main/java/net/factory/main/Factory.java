@@ -5,10 +5,16 @@ import android.support.annotation.StringRes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
+
 import net.common.app.Application;
 import net.common.factory.data.DataSource;
 import net.factory.R;
 import net.factory.model.base.RspModel;
+
+import net.factory.persistence.Account;
+import net.factory.utils.DBFlowExclusionStrategy;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -32,6 +38,8 @@ public class Factory {
         gson = new GsonBuilder()
                 //设置时间格式
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                //设置一个过滤器,在数据库级别时不进行json转换
+                .setExclusionStrategies(new DBFlowExclusionStrategy())
                 .create();
     }
 
@@ -40,6 +48,15 @@ public class Factory {
         return factory;
     }
 
+    public static void setUp()
+    {
+
+        FlowManager.init(new FlowConfig.Builder(getApp())
+                .openDatabasesOnInit(true) //当数据库初始化就打开数据库
+                .build());
+        //持久化的数据初始化
+        Account.load(getApp());
+    }
 
     /**
      * 返回全局的Application
@@ -117,6 +134,11 @@ public class Factory {
      * 收到账户退出信息错误，进行推出操作
      */
     private static void loginOut()
+    {
+
+    }
+
+    public static void disPatcherMessage(String message)
     {
 
     }

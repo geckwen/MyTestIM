@@ -53,7 +53,7 @@ public class AccountActivity extends BaseActivity implements AccountTrigger {
     @Override
     public void initWidget() {
         //初始化fragment
-        mLoginFragment= new RegisterFragment();
+        mLoginFragment= new LoginFragment();
         mCurrentFragment = mLoginFragment;
         getSupportFragmentManager()
                .beginTransaction()
@@ -123,6 +123,6 @@ public class AccountActivity extends BaseActivity implements AccountTrigger {
         //进行fragment的切换
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.lay_container,mCurrentFragment);
+                .replace(R.id.lay_container,mCurrentFragment).commit();
     }
 }

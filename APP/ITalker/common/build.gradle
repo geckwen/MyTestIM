@@ -36,10 +36,12 @@ dependencies {
     compile "de.hdodenhof:circleimageview:$rootProject.ext.circycleImageView"
     compile "com.jakewharton:butterknife:$rootProject.ext.bufferknifeVersion"
 
+
     compile "net.qiujuer.genius:kit-handler:$rootProject.ext.geniusVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.bufferknifeVersion"
 
 
     testCompile 'junit:junit:4.12'
     compile project(':lang')
+
 }

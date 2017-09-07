@@ -44,7 +44,6 @@ public abstract class PresentFragment<Present extends BaseContract.Present > ext
     @Override
     public void showLoading() {
         //显示一个loading
-
     }
 
 

@@ -1,30 +1,49 @@
 package net.factory.model.db;
 
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
 /**
  * Created by CLW on 2017/8/28.
  */
 
-public class User {
+@Table(database = AppDatabase.class)
+public class User extends BaseModel {
+    private  static  final  int SEX_MAN = 1;
+    private  static  final  int SEX_WOMEN = 0;
 
+    @PrimaryKey
     private String id;
+    @Column
     private String name;
+    @Column
     private String phone;
+    @Column
     private String portrait;
+    @Column
     private String desc;
-    private int sex = 0;
+    @Column
+    private int sex = SEX_WOMEN;
+    @Column
     //我对某人的备注信息，也应该写入数据库
     private String ailas;
+    @Column
     // 用户关注人的数量
     private int follows;
+
+    @Column
     // 用户粉丝的数量
     private int following;
+    @Column
     // 我与当前User的关系状态，是否已经关注了这个人
     private boolean isFollow;
-
+    @Column
     // 用户信息最后的更新时间
-
     private Date modifyAt;
 
     public String getId() {
@@ -105,6 +124,14 @@ public class User {
 
     public void setModifyAt(Date modifyAt) {
         this.modifyAt = modifyAt;
+    }
+
+    public String getAilas() {
+        return ailas;
+    }
+
+    public void setAilas(String ailas) {
+        this.ailas = ailas;
     }
 
     @Override

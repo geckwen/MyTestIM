@@ -1,7 +1,5 @@
 package net.factory.main.present.account;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
 
@@ -12,9 +10,8 @@ import net.common.tools.UiShow;
 import net.factory.R;
 import net.factory.model.api.account.RegisterModel;
 import net.factory.model.db.User;
-import net.factory.net.account.RegisterHelper;
-import net.qiujuer.genius.kit.handler.Run;
-import net.qiujuer.genius.kit.handler.runable.Action;
+import net.factory.net.account.AcccountHelper;
+import net.factory.persistence.Account;
 
 import java.util.regex.Pattern;
 
@@ -27,7 +24,7 @@ public class RegisterPresent extends BasePresent<RegisterContract.View> implemen
     /**
      * 初始化view但是为了防止复写父类的构造函数所以用一个方法来接替注册
      *
-     * @param view
+     * @param view 注册的view
      */
     public RegisterPresent(RegisterContract.View view) {
         super(view);
@@ -49,8 +46,8 @@ public class RegisterPresent extends BasePresent<RegisterContract.View> implemen
             //密码需要大于6位
             view.showError(R.string.data_account_register_invalid_parameter_password);
         } else {
-            RegisterModel registerModel = new RegisterModel(phone, password, name);
-            RegisterHelper.register(registerModel, this);
+            RegisterModel registerModel = new RegisterModel(phone, password, name, Account.getPushId());
+            AcccountHelper.register(registerModel, this);
         }
 
     }
@@ -76,13 +73,6 @@ public class RegisterPresent extends BasePresent<RegisterContract.View> implemen
             return;
         //此时是从网络请求回来，并不一定是在主线程
         //强制执行主线程
-       /* Run.onUiAsync(new Action() {
-            @Override
-            public void call() {
-                view.registerSuccess();
-            }
-        });*/
-        //可以尝试一下 在后期
         UiShow.showRes(new Runnable() {
             @Override
             public void run() {

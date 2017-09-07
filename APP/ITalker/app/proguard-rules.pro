@@ -31,3 +31,8 @@
 -keep class com.alibaba.sdk.android.oss.** { *; }
 -dontwarn okio.**
 -dontwarn org.apache.commons.codec.binary.**
+
+-dontwarn com.igexin.**
+-keep class com.igexin.** { *; }
+-keep class org.json.** { *; }
+-keep class * extends com.raizlabs.android.dbflow.config.DatabaseHolder { *; }

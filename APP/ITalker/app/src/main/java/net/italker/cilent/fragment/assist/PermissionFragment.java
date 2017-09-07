@@ -28,6 +28,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 
 /**
+ * 权限检测
  * A simple {@link Fragment} subclass.
  */
 public class PermissionFragment extends BottomSheetDialogFragment
@@ -208,6 +209,7 @@ public class PermissionFragment extends BottomSheetDialogFragment
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this,perms))
         {
+            //系统设置跳转
             new AppSettingsDialog
                     .Builder(this)
                     .build()

@@ -121,43 +121,6 @@
             android:background="@color/black_alpha_32" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/len_4">
-
-
-            <ImageView
-                android:layout_width="@dimen/len_20"
-                android:layout_height="@dimen/len_20"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/len_8"
-                android:layout_marginRight="@dimen/len_8"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_person"
-                android:tint="@color/colorAccent" />
-
-            <EditText
-                android:id="@+id/edit_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/len_2"
-                android:layout_marginStart="@dimen/len_4"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="@string/label_name"
-                android:inputType="text"
-                android:paddingBottom="@dimen/len_8"
-                android:paddingTop="@dimen/len_8"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/textPrimary"
-                android:textColorHint="@color/textSecond"
-                android:textCursorDrawable="@drawable/ic_cursor"
-                android:textSize="@dimen/font_14" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <FrameLayout
@@ -175,7 +138,7 @@
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="@dimen/len_16"
             android:gravity="center"
-            android:text="@string/label_go_login"
+            android:text="@string/label_go_register"
             android:textColor="@color/white"
             android:textSize="@dimen/font_14"
             android:textStyle="bold" />
@@ -209,7 +172,7 @@
             android:layout_height="@dimen/len_44"
             android:layout_gravity="center"
             android:background="@drawable/sel_btn_bg_black_alpha_44"
-            android:text="@string/label_register"
+            android:text="@string/label_login"
             android:textColor="@color/white"
             app:gTouchColor="@color/white_alpha_48"
             app:gTouchCornerRadius="22dp"

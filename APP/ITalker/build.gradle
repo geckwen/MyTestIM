@@ -17,6 +17,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://www.jitpack.io" }
+
     }
 }
 
@@ -37,4 +39,6 @@ ext{
     gsonVersion = '2.8.1'
     gsonParentVersion = '2.8.1'
     retrofitVersion = '2.3.0'
+    getuiVersion = '2.9.3.0'
+    dbflowVersion = '4.0.0-beta7'
 }
