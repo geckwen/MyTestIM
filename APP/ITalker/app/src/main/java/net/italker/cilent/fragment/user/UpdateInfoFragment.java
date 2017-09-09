@@ -3,10 +3,14 @@ package net.italker.cilent.fragment.user;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 
 import com.bumptech.glide.Glide;
@@ -14,11 +18,18 @@ import com.yalantis.ucrop.UCrop;
 
 import net.common.app.Application;
 import net.common.app.BaseFragment;
+import net.common.app.PresentFragment;
+import net.common.factory.present.BaseContract;
 import net.common.widget.recycle.a.PortraitView;
 import net.factory.main.Factory;
+import net.factory.main.present.user.UpUserInfoContract;
+import net.factory.main.present.user.UpUserInfoPrensent;
 import net.factory.net.UploadHelper;
 import net.italker.cilent.R;
+import net.italker.cilent.activity.MainActivity;
 import net.italker.cilent.fragment.media.GalleyFragment;
+import net.qiujuer.genius.ui.widget.Button;
+import net.qiujuer.genius.ui.widget.Loading;
 
 import java.io.File;
 
@@ -30,9 +41,30 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateInfoFragment extends BaseFragment {
+public class UpdateInfoFragment extends PresentFragment<UpUserInfoContract.Present> implements UpUserInfoContract.View{
+    @BindView(R.id.user_des)
+    EditText mUserDes;
+
+    @BindView(R.id.usr_sex)
+    ImageView mUserSex;
+
     @BindView(R.id.im_portrait)
     PortraitView mPortrait;
+
+    @BindView(R.id.loading)
+    Loading mLoading;
+
+    @BindView(R.id.btn_submit)
+    Button mBtnSubmit;
+
+    private String mPortraitPath;
+
+    private boolean isWoMan = true;
+
+    @Override
+    protected UpUserInfoContract.Present initPresent() {
+        return new UpUserInfoPrensent(this);
+    }
 
     @Override
     protected int getContentLayoutId() {
@@ -40,6 +72,9 @@ public class UpdateInfoFragment extends BaseFragment {
     }
 
 
+    /**
+     * 头像点击
+     */
     @OnClick(R.id.im_portrait)
      void onPortraitClick()
      {
@@ -77,6 +112,9 @@ public class UpdateInfoFragment extends BaseFragment {
         }
     }
 
+    /**加载头像并上传头像
+     * @param resultUri ucrop的图片地址
+     */
     private void loadPortrait(Uri resultUri)
     {
         Glide.with(this)
@@ -84,34 +122,66 @@ public class UpdateInfoFragment extends BaseFragment {
                 .asBitmap()
                 .centerCrop()
                 .into(mPortrait);
+        mPortraitPath = resultUri.getPath();
         final String localPath = resultUri.getPath();
         Log.e("TAG",String.format("localPath:%s",localPath));
-        Factory.runAsync(new Runnable() {
-            @Override
-            public void run() {
-               String url = UploadHelper.uploadPortrait(localPath);
-                Log.e("TAG",String.format("url:%s",url));
-            }
-        });
+
+    }
+
+    /**
+     * 更改性别
+     */
+     @OnClick(R.id.usr_sex)
+     void onChangerSex()
+     {
+         isWoMan= !isWoMan;
+         Drawable drawable = getResources().getDrawable(isWoMan?R.drawable.ic_sex_woman:R.drawable.ic_sex_man);
+         mUserSex.setImageDrawable(drawable);
+         //设置层级关系
+         mUserSex.getBackground().setLevel(isWoMan?1:0);
+     }
+
+    @OnClick(R.id.btn_submit)
+    void onSubmitOnclick()
+    {
+        //获得相对应的值
+        String des = mUserDes.getText().toString();
+        mPresent.UpdateInfo(des,mPortraitPath,isWoMan);
+    }
+    @Override
+    public void showError(@StringRes int str) {
+        super.showError(str);
+        //当显示错误时触发
+        //停止loading
+        mLoading.stop();
+        //让控件可以输入
+        mUserDes.setEnabled(true);
+        mUserSex.setEnabled(true);
+        mPortrait.setEnabled(true);
+        //让提交按钮可以再次提交
+        mBtnSubmit.setEnabled(true);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void showLoading() {
+        super.showLoading();
+        //开始loading
+        mLoading.start();
+        //让控件不可以输入
+        mUserDes.setEnabled(false);
+        mUserSex.setEnabled(false);
+        mPortrait.setEnabled(false);
+        //让提交按钮不可以再次提交
+        mBtnSubmit.setEnabled(false);
     }
 
+    /**
+     * 信息注册成功后进入主界面
+     */
     @Override
-    public void onStop() {
-        super.onStop();
+    public void UpdateInfoSuccesss() {
+        MainActivity.show(getActivity());
+        getActivity().finish();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
 }

@@ -92,7 +92,14 @@ public class Account {
      */
     public static  boolean isComplete()
     {
-        return isAccount();
+        //判断是否登录状态
+        if(isAccount())
+        {
+            User user = getUser();
+            return !TextUtils.isEmpty(user.getDesc()) &&!TextUtils.isEmpty(user.getPortrait())
+                    &&user.getSex()!=0;
+        }
+        return false;
     }
 
     /**

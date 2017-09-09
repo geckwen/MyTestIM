@@ -107,7 +107,7 @@ public class Factory {
                     decodeRspModel(R.string.data_rsp_error_account_register,callback);
                     break;
                 case RspModel.ERROR_ACCOUNT_LOGIN:
-                    decodeRspModel(R.string.data_rsp_error_account_login,callback);
+                    decodeRspModel(R.string.data_account_login_error_validate,callback);
                     break;
                 case RspModel.ERROR_CREATE_GROUP:
                     decodeRspModel(R.string.data_rsp_error_create_group,callback);

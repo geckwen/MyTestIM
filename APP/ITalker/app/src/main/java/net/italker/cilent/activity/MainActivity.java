@@ -3,6 +3,7 @@ package net.italker.cilent.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 
 import net.common.app.BaseActivity;
 import net.common.widget.recycle.a.PortraitView;
+import net.factory.persistence.Account;
 import net.italker.cilent.R;
 import net.italker.cilent.fragment.assist.PermissionFragment;
 import net.italker.cilent.fragment.main.ActivityFragment;
@@ -102,6 +104,18 @@ NavHelper.OnTabChangeListener<Integer>{
         //权限是否全部获取
         PermissionFragment.haveAllPermission(this,getSupportFragmentManager());
 
+    }
+
+    @Override
+    protected boolean initArgs(Bundle bundle) {
+        //判断是否信息是否完善
+        if(Account.isComplete()) {
+            return true;
+        }
+        else{
+            UserActivity.show(this);
+            return false;
+        }
     }
 
     @Override

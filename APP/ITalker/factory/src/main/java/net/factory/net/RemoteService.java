@@ -4,10 +4,13 @@ import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.api.account.LoginModel;
 import net.factory.model.api.account.RegisterModel;
 import net.factory.model.base.RspModel;
+import net.factory.model.card.UserCard;
+import net.factory.model.user.UpdateInfoModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -39,4 +42,12 @@ public interface RemoteService {
      */
     @POST("account/bind/{pushId}")
     Call<RspModel<AccountRsqModel>> onBind(@Path(encoded = true,value = "pushId")String pushId);
+
+    /**
+     * 用户更新
+     * @param model 用户更新model
+     * @return 返回一个rsqModel
+     */
+    @PUT("user")
+    Call<RspModel<UserCard>> UpdateInfo(@Body UpdateInfoModel model);
 }

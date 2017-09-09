@@ -23,8 +23,8 @@ public class Appliacation extends ResourceConfig {
         	register(GsonProvider.class);
         	//注册过滤器
         	register(AuthRequestFilter.class);
-/*        	//响应拦截器
-        	register(AuthReponseFilter.class);*/
+        	//响应拦截器
+        	register(AuthReponseFilter.class);
         	// 注册日志打印输出
         	register(Logger.class);
         }

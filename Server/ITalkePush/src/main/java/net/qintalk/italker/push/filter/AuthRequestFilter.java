@@ -45,7 +45,7 @@ public class AuthRequestFilter implements ContainerRequestFilter {
 			if(user!=null)
 			{
 				//当前请求上下文
-				requestContext.setSecurityContext(new SecurityContext() {
+			/*	requestContext.setSecurityContext(new SecurityContext() {
 					
 					@Override
 					public boolean isUserInRole(String role) {
@@ -70,9 +70,9 @@ public class AuthRequestFilter implements ContainerRequestFilter {
 						// TODO Auto-generated method stub
 						return null;
 					}
-				});
+				});*/
 //				//写入上下文就拦截
-//			LocalUser.addLocalUser(user);
+				LocalUser.addLocalUser(user);
 			return;
 			}
 		}

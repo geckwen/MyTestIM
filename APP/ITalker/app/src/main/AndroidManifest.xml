@@ -46,7 +46,7 @@
         <activity
             android:name=".activity.UserActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.TransStatusBar"
             android:label="@string/title_activity_user"/>
         <!--个推的广播接收注册-->
         <receiver android:name=".MessagerReceive"

@@ -14,8 +14,8 @@ import java.util.Date;
 
 @Table(database = AppDatabase.class)
 public class User extends BaseModel {
-    private  static  final  int SEX_MAN = 1;
-    private  static  final  int SEX_WOMEN = 0;
+    public   static  final  int SEX_MAN = 1;
+    public  static  final  int SEX_WOMEN = 2;
 
     @PrimaryKey
     private String id;

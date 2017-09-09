@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class NetWork {
-    public  static final NetWork  singeInstance = new NetWork();
+    private static final NetWork  singeInstance = new NetWork();
 
     private static volatile Retrofit retrofit;
     private NetWork()
