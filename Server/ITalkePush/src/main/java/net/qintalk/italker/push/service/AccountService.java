@@ -15,7 +15,6 @@ import net.qintalk.italker.push.bean.api.account.RegisterModel;
 import net.qintalk.italker.push.bean.card.UserCard;
 import net.qintalk.italker.push.bean.db.User;
 import net.qintalk.italker.push.factory.UserFactory;
-
 import net.qintalk.italker.push.bean.api.account.AccountRsqModel;
 import net.qintalk.italker.push.bean.api.account.LoginModel;
 
@@ -148,4 +147,6 @@ public class AccountService extends BaseService {
 		}
 
 	}
+	
+	
 }

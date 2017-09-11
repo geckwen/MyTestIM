@@ -3,12 +3,16 @@ package net.qintalk.italker.push.factory;
 import org.hibernate.Session;
 
 import net.qintalk.italker.push.bean.db.User;
+import net.qintalk.italker.push.bean.db.UserFollow;
 import net.qintalk.italker.push.utils.Hib;
 import net.qintalk.italker.push.utils.Hib.Query;
 import net.qintalk.italker.push.utils.TextUtil;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import net.qintalk.italker.push.utils.Hib.QueryOnly;
 
@@ -24,10 +28,9 @@ public class UserFactory {
 	 * @param phone token
 	 * @return	返回一个user
 	 */
-	public static User findByToken(String token)
+	public static User findByToken(final String token)
 	{
 		return Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				// session进行查询操作
 				User user =(User)session.createQuery("from User where token=:token")
@@ -43,10 +46,9 @@ public class UserFactory {
 	 * @param phone 账号
 	 * @return	返回一个user
 	 */
-	public static User findByPhone(String phone)
+	public static User findByPhone(final String phone)
 	{
 		return Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				// session进行查询操作
 				User user =(User)session.createQuery("from User where phone=:IPHONE")
@@ -62,10 +64,9 @@ public class UserFactory {
 	 * @param name 用户名字
 	 * @return	user
 	 */
-	public static User findByName(String name)
+	public static User findByName(final String name)
 	{
 		return Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				// session进行查询操作
 				User user =(User)session.createQuery("from User where name=:NAME")
@@ -77,17 +78,41 @@ public class UserFactory {
 	}
 	
 	/**
+	 * 模糊查询名字
+	 * @param name 需要查询的名字
+	 * @return
+	 */
+	public static List<User> findByLikeName( String name)
+	{
+		if(!TextUtil.StringNotEmpty(name))
+			name = "";
+		String searchName = "%"+name+"%";
+		return Hib.query(new Query<List<User>>() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<User> query(Session session) {
+				// 设置只能查询20条
+				return  session.createQuery("from User where lower(name) like :name and portrait is not null ")
+				.setParameter("name", searchName)
+				.setMaxResults(20)
+				.list();
+				
+			}
+		});
+	}
+	
+	/**
 	 * 登陆查询操作
 	 * @param account 用户账户
 	 * @param password	用户密码
 	 * @return	返回用户信息
 	 */
-	public static User loginCheck(String account,String password)
+	public static User loginCheck(final String account,String password)
 	{
 		final String pas = password.trim();
 		final String encodePas = passwordMd5(pas);
 		User user = Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				// TODO 进行查询操作
 				return (User)session.createQuery("from User where phone=:account "
@@ -132,7 +157,7 @@ public class UserFactory {
 	 * @param user 用户
 	 * @return 一个带有token的用户
 	 */
-	public static User loginUser( User user)
+	public static User loginUser( final User user)
 	{	
 			//用UUID生成一个随机token
 		String newToken = UUID.randomUUID().toString();
@@ -140,7 +165,6 @@ public class UserFactory {
 		newToken = TextUtil.encodeBase64(newToken);
 		user.setToken(newToken);
 		Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				// TODO 进行数据的更新或者存储
 				session.saveOrUpdate(user);
@@ -160,13 +184,12 @@ public class UserFactory {
 	private static User createUser(String account,String password,String name) 
 	{
 
-		User user = new User();
+		final User user = new User();
 		user.setPassword(password);
 		user.setName(name);
 		//用户账号
 		user.setPhone(account);
 		return Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				 session.save(user);
 				 return user;
@@ -182,14 +205,13 @@ public class UserFactory {
 	 * @param pushId 设备ID
 	 * @return 返回绑定过的user
 	 */
-	public static User bindPushId(User user,String pushId){
+	public static User bindPushId(final User user,final String pushId){
 		//查看这个设备有哪些绑定过
 		//解除这些绑定 防止推送错乱
 		Hib.queryOnly(new QueryOnly() {
-			@Override
 			public void query(Session session) {
 				// TODO Auto-generated method stub
-			@SuppressWarnings("unchecked")
+		
 			List<User> userList=(List<User>)session.createQuery("from User where lower(pushId)=:pushId and Id!=:userID")
 				.setParameter("pushId", pushId.toLowerCase())
 				.setParameter("userID", user.getId())
@@ -230,10 +252,9 @@ public class UserFactory {
 	 * @param user 用户
 	 * @return 返回一个更新后的用户
 	 */
-	public static User updateUser(User user)
+	public static User updateUser(final User user)
 	{
 		return Hib.query(new Query<User>() {
-			@Override
 			public User query(Session session) {
 				// TODO 进行数据更新
 				session.saveOrUpdate(user);
@@ -257,5 +278,94 @@ public class UserFactory {
 		return TextUtil.encodeBase64(passwordMd5);
 	}
 
+	
+	/**
+	 * 得到关注人列表
+	 * @param self 自己
+	 * @return 返回一堆关注人
+	 */
+	public static List<User> getFollows(final User self) {
+		return  Hib.query(new Query<List<User>>() {
+			public List<User> query(Session session) {
+				// TODO Auto-generated method stub
+				session.load(self,self.getId());
+				Set<UserFollow> follows = self.getFollowing();
+				return follows.stream().map(follow->{
+					return follow.getTarget();
+				}).collect(Collectors.toList());
+			}
+		});
+	}
+
+	/**
+	 * 查找某人id
+	 * @param followId 某人id
+	 * @return 得到某人
+	 */
+	public static User findById(String followId) {
+		return Hib.query(new Query<User>() {
+			public User query(Session session) {
+				// session进行查询操作
+				User user =(User)session.createQuery("from User where id=:Id")
+				.setParameter("Id", followId)
+				.uniqueResult();
+				return user;
+			}
+		});
+	}
+	
+	/**
+	 * 关注某人操作
+	 * @param origin 发起人
+	 * @param target 被关注人
+	 * @return
+	 */
+	public static User follow(User origin,User target)
+	{
+		
+		UserFollow userFollow = getUserFollow(origin, target);
+		if(userFollow!=null)
+			return target;
+		return Hib.query(new Query<User>() {
+
+			@Override
+			public User query(Session session) {
+				// TODO Auto-generated method stub
+				session.load(origin, origin.getId());
+				session.load(target, target.getId());
+				UserFollow originfollow = new UserFollow();
+				originfollow.setOrigin(origin);
+				originfollow.setTarget(target);
+				
+				UserFollow targetfollow = new UserFollow();
+				targetfollow.setOrigin(target);
+				targetfollow.setTarget(origin);
+				session.save(originfollow);
+				session.save(targetfollow);
+				return target;
+			}
+		});
+		
+	}
+	
+	/**
+	 * 查询之前是否关注过某人
+	 * @param origin 发起人
+	 * @param target 被关注人
+	 * @return 关注的情况
+	 */
+	public static UserFollow getUserFollow(User origin,User target)
+	{
+		return Hib.query(new Query<UserFollow>() {
+			@Override
+			public UserFollow query(Session session) {
+				// TODO Auto-generated method stub
+				return (UserFollow) session.createQuery("from UserFollow where originId =:originId and targetId=:targetId")
+				.setParameter("originId", origin.getId())
+				.setParameter("targetId", target.getId())
+				.uniqueResult();
+			}
+		});
+	}
 	
 }
