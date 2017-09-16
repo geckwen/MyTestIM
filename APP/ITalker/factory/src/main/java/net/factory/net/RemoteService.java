@@ -7,8 +7,11 @@ import net.factory.model.base.RspModel;
 import net.factory.model.card.UserCard;
 import net.factory.model.user.UpdateInfoModel;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -50,4 +53,37 @@ public interface RemoteService {
      */
     @PUT("user")
     Call<RspModel<UserCard>> UpdateInfo(@Body UpdateInfoModel model);
+
+    /**
+     * 拉取好友列表
+     * @return  帶有信息的userCard
+     */
+    @GET("user/contact")
+    Call<RspModel<List<UserCard>>> contact();
+
+    /**
+     * 通過用戶Id進行添加
+     * @param followId 被添加用戶的Id
+     * @return 返回一個usercard
+     */
+    @PUT("user/follow/{followId}")
+    Call<RspModel<UserCard>> follow(@Path(encoded = true,value = "followId") String followId);
+
+    /**
+     * 進行用戶的Id查詢
+     * @param id  用户的
+     * @return 被查到的id的信息
+     */
+    @GET("user/{id}")
+    Call<RspModel<UserCard>> getUser(@Path(encoded = true,value = "id" )String  id);
+
+    /**
+     * 通过模糊名字查询来搜查用户信息
+     * @param name 用户名字
+     * @return  返回一些系列用户
+     */
+    @GET("user/search/{name}")
+    Call<RspModel<List<UserCard>>> search(@Path(encoded = true,value = "name" )String  name);
+
+
 }

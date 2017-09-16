@@ -28,13 +28,14 @@
             android:theme="@style/AppTheme.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Main"/>
+            android:theme="@style/AppTheme.Main" />
         <activity
             android:name=".activity.AccountActivity"
             android:screenOrientation="portrait"
@@ -45,18 +46,24 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activity.UserActivity"
+            android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransStatusBar"
-            android:label="@string/title_activity_user"/>
-        <!--个推的广播接收注册-->
-        <receiver android:name=".MessagerReceive"
+            android:theme="@style/AppTheme.TransStatusBar" />
+        <!-- 个推的广播接收注册 -->
+        <receiver
+            android:name=".MessagerReceive"
             android:enabled="true"
             android:exported="true"
             android:permission="1000">
             <intent-filter>
-                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"></action>
+                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".activity.SearchActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.TransStatusBar"
+            />
     </application>
 
 </manifest>

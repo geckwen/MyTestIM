@@ -10,6 +10,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 /**
+ * 基本的activity
  * Created by CLW on 2017/7/29.
  */
 

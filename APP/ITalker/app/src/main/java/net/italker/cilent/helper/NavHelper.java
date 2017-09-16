@@ -100,6 +100,7 @@ public class NavHelper<T> {
       {
           if(currentTab.fragment == null)
           {
+              //进行容器里面的创建
               Fragment mfragment = Fragment.instantiate(mcontext,currentTab.mclass.getName(),null);
               //缓存fragment
               currentTab.fragment=mfragment;

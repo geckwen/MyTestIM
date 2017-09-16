@@ -38,12 +38,18 @@ public abstract class PresentFragment<Present extends BaseContract.Present > ext
      */
     @Override
     public void showError(@StringRes int str) {
-        Application.showToast(str);
+        if(placeHolderView!=null) {
+         placeHolderView.triggerError(str);
+        }else {
+            Application.showToast(str);
+        }
     }
 
     @Override
     public void showLoading() {
         //显示一个loading
+        if(placeHolderView!=null)
+            placeHolderView.triggerLoading();
     }
 
 

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.common.widget.convention.PlaceHolderView;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -20,6 +22,7 @@ import butterknife.Unbinder;
 public  abstract class BaseFragment extends Fragment  {
     protected  View mRoot;
     protected Unbinder mRootBinder;
+    protected PlaceHolderView mplaceHolderView;
 
     @Override
     public void onAttach(Context context) {
@@ -94,36 +97,6 @@ public  abstract class BaseFragment extends Fragment  {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
 
     /**
      * 处理点击界面导航返回时调用
@@ -132,5 +105,14 @@ public  abstract class BaseFragment extends Fragment  {
      */
     public boolean onBackPressed(){
         return false;
+    }
+
+    /**
+     * 设置占位布局
+     * @param placeHolderView 继承类占位布局的view
+     */
+    public void setPlaceHolderView(PlaceHolderView placeHolderView)
+    {
+        this.placeHolderView = placeHolderView;
     }
 }

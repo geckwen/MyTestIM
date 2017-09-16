@@ -60,8 +60,11 @@ NavHelper.OnTabChangeListener<Integer>{
     @BindView(R.id.navigation)
     BottomNavigationView mNvigation;
 
-
+    //控制fragment跳转的
     NavHelper<Integer> mnavHelper;
+
+    //用于群和用户添加的type
+    private  int type;
 
     /**
      * 直接跳转
@@ -130,13 +133,31 @@ NavHelper.OnTabChangeListener<Integer>{
     @OnClick(R.id.image_search)
     void onSearch()
     {
+        //在群界面搜索时,在顶部点击搜索按钮进入搜索
+        //如果不是群界面,则默认为用户搜索
+        if(mnavHelper.getCurrentTab().extra.equals(R.id.action_group)) {
+            type = SearchActivity.TYPE_GROUP;
+        }else {
+            //如果不是群操作全部视为user操作
+            type = SearchActivity.TYPE_USER;
+        }
+        SearchActivity.show(this,type);
 
     }
 
+    /**
+     * 当点击添加用户或者群时自动根据其所在的界面进行切换
+     */
     @OnClick(R.id.btn_action)
     void onActivity()
     {
-        AccountActivity.onShow(this);
+        if(mnavHelper.getCurrentTab().extra.equals(R.id.action_group)) {
+            type = SearchActivity.TYPE_GROUP;
+        }else {
+            //如果不是群操作全部视为user操作
+            type = SearchActivity.TYPE_USER;
+        }
+        SearchActivity.show(this,type);
     }
 
     /**
