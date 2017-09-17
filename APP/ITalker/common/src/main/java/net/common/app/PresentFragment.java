@@ -38,8 +38,8 @@ public abstract class PresentFragment<Present extends BaseContract.Present > ext
      */
     @Override
     public void showError(@StringRes int str) {
-        if(placeHolderView!=null) {
-         placeHolderView.triggerError(str);
+        if(mplaceHolderView!=null) {
+         mplaceHolderView.triggerError(str);
         }else {
             Application.showToast(str);
         }
@@ -48,8 +48,8 @@ public abstract class PresentFragment<Present extends BaseContract.Present > ext
     @Override
     public void showLoading() {
         //显示一个loading
-        if(placeHolderView!=null)
-            placeHolderView.triggerLoading();
+        if(mplaceHolderView!=null)
+            mplaceHolderView.triggerLoading();
     }
 
 

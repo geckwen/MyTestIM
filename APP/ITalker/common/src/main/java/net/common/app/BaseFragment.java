@@ -113,6 +113,6 @@ public  abstract class BaseFragment extends Fragment  {
      */
     public void setPlaceHolderView(PlaceHolderView placeHolderView)
     {
-        this.placeHolderView = placeHolderView;
+        this.mplaceHolderView = placeHolderView;
     }
 }

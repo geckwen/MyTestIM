@@ -105,6 +105,34 @@ public class UpdateHelper {
         return call;
 
     }
+    public static  void follow( String id,final DataSource.Callback<UserCard> callback)
+    {
+        RemoteService service = NetWork.getAccountRemoteService();
+        Call<RspModel<UserCard>> call = service.follow(id);
+        call.enqueue(new Callback<RspModel<UserCard>>() {
+            @Override
+            public void onResponse(Call<RspModel<UserCard>> call, Response<RspModel<UserCard>> response) {
+                RspModel<UserCard> rspModel =response.body();
+                if(rspModel.success())
+                {
+                    UserCard userCard =rspModel.getResult();
+                    User user = userCard.build();
+                    user.save();
+                    //TODO联系人刷新
+                    callback.onDataLoader(userCard);
+
+                }else{
+                    Factory.decodeRsqCode(rspModel,callback);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<RspModel<UserCard>> call, Throwable t) {
+                callback.onDataNotAvaliable(R.string.data_rsp_error_service);
+            }
+        });
+    }
 
 
 

@@ -37,6 +37,7 @@
         android:layout_width="@dimen/len_52"
         android:layout_height="@dimen/len_28"
         android:contentDescription="@string/app_name"
+        android:enabled="false"
         android:src="@drawable/sel_opt_done_add"
         android:layout_gravity="center_vertical|end"
         android:background="@drawable/sel_btn_bg_accent_4"

@@ -245,10 +245,14 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
 
         protected Unbinder unbinder;
         private  AdapterCallBack adapterCallBack;
-        private T mData;
+        protected T mData;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+        }
+        public MyViewHolder(View itemView,AdapterCallBack adapterCallBack) {
+            super(itemView);
+            this.adapterCallBack = adapterCallBack;
         }
 
 
