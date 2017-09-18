@@ -56,7 +56,7 @@ public class UserPresent extends BasePresent<SearchContract.UserView> implements
             });
         }
     }
-    }
+
 
     @Override
     public void onDataLoader(final List<UserCard> user) {

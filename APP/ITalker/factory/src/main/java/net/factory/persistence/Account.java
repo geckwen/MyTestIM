@@ -134,6 +134,10 @@ public class Account {
         return  TextUtils.isEmpty(userId)?new User():SQLite.select().from(User.class)
                 .where(User_Table.id.eq(userId)).querySingle();
     }
+    public static String getUserId()
+    {
+        return  getUser().getId();
+    }
 
     /**
      * 拿到token值

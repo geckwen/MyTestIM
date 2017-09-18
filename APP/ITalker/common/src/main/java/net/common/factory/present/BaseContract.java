@@ -2,6 +2,8 @@ package net.common.factory.present;
 
 import android.support.annotation.StringRes;
 
+import net.common.widget.recycle.RecycleAdapter;
+
 /**
  * MVP模式中公共的基本契约
  * Created by CLW on 2017/8/25.
@@ -22,5 +24,16 @@ public interface BaseContract {
         void start();
         //公共的销毁方法
         void destroy();
+    }
+
+    //最基本的列表的View的职责
+    interface RecycleView<T extends Present,ViewType> extends View<T>{
+        //拿到适配器，然后自主的进行刷新
+        RecycleAdapter<ViewType> getRecycleAdapter();
+
+        //当适配器进行数据更改时刷新
+        void onAdapterDataRefresh();
+
+
     }
 }

@@ -6,14 +6,18 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import net.common.model.Author;
+import net.factory.utils.DiffUiDataCallback;
+
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by CLW on 2017/8/28.
  */
 
 @Table(database = AppDatabase.class)
-public class User extends BaseModel {
+public class User extends BaseModel implements Author,DiffUiDataCallback.UiDataDiffer<User>{
     public   static  final  int SEX_MAN = 1;
     public  static  final  int SEX_WOMEN = 2;
 
@@ -149,5 +153,45 @@ public class User extends BaseModel {
                 ", isFollow=" + isFollow +
                 ", modifyAt=" + modifyAt +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+            return !id.equals(user.id)?false:true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + phone.hashCode();
+        result = 31 * result + portrait.hashCode();
+        result = 31 * result + desc.hashCode();
+        result = 31 * result + sex;
+        result = 31 * result + ailas.hashCode();
+        result = 31 * result + follows;
+        result = 31 * result + following;
+        result = 31 * result + (isFollow ? 1 : 0);
+        result = 31 * result + modifyAt.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean isSame(User old) {
+      return  this==old|| Objects.equals(id,old.getId());
+    }
+
+    @Override
+    public boolean isUiContentSame(User old) {
+       return  this==old||(
+               Objects.equals(name,old.name)
+               &&Objects.equals(portrait,old.portrait)
+               &&Objects.equals(sex,old.sex)
+               &&Objects.equals(desc,old.desc)
+               &&Objects.equals(isFollow,old.isFollow)
+               );
     }
 }

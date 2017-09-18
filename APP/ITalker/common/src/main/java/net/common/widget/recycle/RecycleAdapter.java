@@ -189,6 +189,15 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
     }
 
     /**
+     * 获得数据集合
+     * @return
+     */
+    public List<T> getDataList()
+    {
+        return mDatalist;
+    }
+
+    /**
      * 监听点击事件
      * @param v 根布局
      */
