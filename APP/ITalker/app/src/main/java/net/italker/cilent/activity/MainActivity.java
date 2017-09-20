@@ -46,7 +46,7 @@ NavHelper.OnTabChangeListener<Integer>{
     View mLayAppbar ;
 
     @BindView(R.id.image_portrait)
-    PortraitView mimgePortrait;
+    PortraitView mgePortrait;
 
     @BindView(R.id.image_search)
     ImageView mimageSearch;
@@ -128,6 +128,7 @@ NavHelper.OnTabChangeListener<Integer>{
         Menu menu = mNvigation.getMenu();
         //触发第一次的home
         menu.performIdentifierAction(R.id.action_home,0);
+        mgePortrait.setPortraitView(Glide.with(this),Account.getUser());
     }
 
     @OnClick(R.id.image_search)
@@ -158,6 +159,15 @@ NavHelper.OnTabChangeListener<Integer>{
             type = SearchActivity.TYPE_USER;
         }
         SearchActivity.show(this,type);
+    }
+
+    /**
+     * 点击头像跳转信息
+     */
+    @OnClick(R.id.image_portrait)
+    void onPortraitCilck()
+    {
+        PersonalActivity.show(this,Account.getUserId());
     }
 
     /**

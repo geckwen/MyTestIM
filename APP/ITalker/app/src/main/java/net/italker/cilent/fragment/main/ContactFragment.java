@@ -23,8 +23,10 @@ import net.factory.model.card.UserCard;
 import net.factory.model.db.User;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MessageActivity;
+import net.italker.cilent.activity.PersonalActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -117,6 +119,11 @@ public class ContactFragment extends PresentFragment<ContactContract.Present> im
             portraitView.setPortraitView(Glide.with(ContactFragment.this),data);
             mNmae.setText(data.getName());
             mDes.setText(data.getDesc());
+        }
+        @OnClick(R.id.im_portrait)
+        void onClikPortrait()
+        {
+            PersonalActivity.show(getContext(),mData.getId());
         }
 
     }

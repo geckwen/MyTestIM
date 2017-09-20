@@ -22,6 +22,7 @@ import net.factory.main.present.search.SearchContract;
 import net.factory.main.present.search.UserPresent;
 import net.factory.model.card.UserCard;
 import net.italker.cilent.R;
+import net.italker.cilent.activity.PersonalActivity;
 import net.italker.cilent.activity.SearchActivity;
 import net.qiujuer.genius.ui.Ui;
 import net.qiujuer.genius.ui.drawable.LoadingCircleDrawable;
@@ -97,6 +98,11 @@ public class UserSearchFragment extends PresentFragment<SearchContract.Present>
             presnet.follow(mData.getId());
         }
 
+        @OnClick(R.id.search_portrait)
+        void onClikPortrait()
+        {
+            PersonalActivity.show(getContext(),mData.getId());
+        }
 
         @Override
         public void showError(@StringRes int str) {

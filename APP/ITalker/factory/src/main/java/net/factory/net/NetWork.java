@@ -22,12 +22,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class NetWork {
-    private static final NetWork  singeInstance = new NetWork();
+    private static final NetWork  singeInstance ;
 
     private static volatile Retrofit retrofit;
     private NetWork()
     {
         retrofit = getRetrofit();
+    }
+    static {
+        singeInstance = new NetWork();
     }
 
     //获得一个retrofit

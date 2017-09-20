@@ -26,4 +26,6 @@ public class MessageActivity extends BaseActivity {
     {
         return R.layout.activity_message;
     }
+
+
 }
