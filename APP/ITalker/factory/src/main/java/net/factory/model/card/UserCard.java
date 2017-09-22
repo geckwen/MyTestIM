@@ -157,6 +157,7 @@ public class UserCard {
 
 	//缓存一个对应的user,不能被gson框架解析使用
 	private transient User user;
+
 	public  User build()
 	{
 		if(user == null)

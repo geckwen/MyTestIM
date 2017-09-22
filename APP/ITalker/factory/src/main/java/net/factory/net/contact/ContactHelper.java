@@ -6,6 +6,7 @@ import net.common.factory.data.DataSource;
 import net.common.tools.UiShow;
 import net.factory.R;
 import net.factory.main.Factory;
+import net.factory.model.DBHelper;
 import net.factory.model.base.RspModel;
 import net.factory.model.card.UserCard;
 import net.factory.model.db.User;
@@ -76,7 +77,7 @@ public class ContactHelper {
                 {
                     //TODO 数据库操作刷新 但是不进行通知
                     User user = userCard.build();
-                    user.save();
+                    DBHelper.save(User.class,user);
                     return user;
                 }
 

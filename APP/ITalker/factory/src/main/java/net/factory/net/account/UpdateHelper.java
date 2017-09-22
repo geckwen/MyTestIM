@@ -3,6 +3,7 @@ package net.factory.net.account;
 import net.common.factory.data.DataSource;
 import net.factory.R;
 import net.factory.main.Factory;
+import net.factory.model.DBHelper;
 import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.base.RspModel;
 import net.factory.model.card.UserCard;
@@ -34,7 +35,7 @@ public class UpdateHelper {
                         if(rspModel.success()) {
                             UserCard userCard = rspModel.getResult();
                             User user =userCard.build();
-                            user.save();
+                            DBHelper.save(User.class,user);
                             callback.onDataLoader(userCard);
                         }else{
                             Factory.decodeRsqCode(rspModel,callback);
@@ -117,7 +118,7 @@ public class UpdateHelper {
                 {
                     UserCard userCard =rspModel.getResult();
                     User user = userCard.build();
-                    user.save();
+                    DBHelper.save(User.class,user);
                     //TODO联系人刷新
                     callback.onDataLoader(userCard);
 

@@ -28,6 +28,10 @@ import net.factory.model.db.User;
 import net.italker.cilent.R;
 import net.qiujuer.genius.ui.widget.Button;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -129,7 +133,8 @@ public class PersonalActivity extends PresentToolBarActivity<PersonalContract.Pr
     public void onLoadDone(User user) {
         if(user==null)
         return;
-
+        Socket socket;
+        socket.getOutputStream()
         mName.setText(user.getName());
         mDes.setText(user.getDesc());
         mPortrait.setPortraitView(Glide.with(this),user);

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import net.common.factory.data.DataSource;
 import net.factory.R;
 import net.factory.main.Factory;
+import net.factory.model.DBHelper;
 import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.api.account.LoginModel;
 import net.factory.model.api.account.RegisterModel;
@@ -86,7 +87,7 @@ public class AcccountHelper {
                     //进行数据库的绑定和缓存的绑定
                     //进行事务操作并存储数据
                     if(user!=null){
-                        user.save();
+                        DBHelper.save(User.class,user);
                         Account.saveUser(model);
                     }
                     if(model.isBind()){

@@ -289,9 +289,12 @@ public class UserFactory {
 			public List<User> query(Session session) {
 				// TODO Auto-generated method stub
 				session.load(self,self.getId());
-				Set<UserFollow> follows = self.getFollowing();
-				Set<UserFollow> followp = self.getFollowers();
-				return follows.stream().map(follow->{
+				Set<UserFollow> following = self.getFollowing();
+				Set<UserFollow> followers = self.getFollowers();
+				followers.stream().map(follow->{
+					return follow.getTarget();
+				}).collect(Collectors.toList());
+				return following.stream().map(follow->{
 					return follow.getTarget();
 				}).collect(Collectors.toList());
 			}
