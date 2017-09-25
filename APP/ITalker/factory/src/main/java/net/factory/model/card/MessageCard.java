@@ -97,6 +97,22 @@ public class MessageCard {
         this.createAt = createAt;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public boolean isUploader() {
+        return uploader;
+    }
+
+    public void setUploader(boolean uploader) {
+        this.uploader = uploader;
+    }
+
     public Message build(Group group, User sender, User receive)
     {
         Message message =new Message();
@@ -108,6 +124,7 @@ public class MessageCard {
         message.setType(type);
         message.setCreateAt(createAt);
         message.setSender(sender);
+        message.setStatus(status);
         return  message;
     }
 

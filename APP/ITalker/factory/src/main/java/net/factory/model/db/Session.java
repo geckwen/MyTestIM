@@ -174,16 +174,10 @@ public class Session extends BaseModel implements DiffUiDataCallback.UiDataDiffe
      * @return 返回一个Session.Identify
      */
     public static Identify createSessionIdentify(Message message) {
-        Identify identify = new Identify();
-        if (message.getGroup() == null) {
-            identify.type = Message.RECEIVER_TYPE_NONE;
-            User other = message.getOther();
-            identify.id = other.getId();
-        } else {
-            identify.type = Message.RECEIVER_TYPE_GROUP;
-            identify.id = message.getGroup().getId();
-        }
-        return identify;
+        return null;
+    }
+
+    public void refreshNow() {
     }
 
 

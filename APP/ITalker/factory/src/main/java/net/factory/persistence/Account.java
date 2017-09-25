@@ -2,15 +2,15 @@ package net.factory.persistence;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
-import net.factory.main.Factory;
+import net.factory.model.db.User_Table;
+import net.factory.present.present.Factory;
 import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.db.User;
-import net.factory.model.db.User_Table;
+
 
 /**
  * 登陆的设备信息设置
@@ -131,8 +131,10 @@ public class Account {
     public static User getUser()
     {
 
+
         return  TextUtils.isEmpty(userId)?new User():SQLite.select().from(User.class)
                 .where(User_Table.id.eq(userId)).querySingle();
+
     }
     public static String getUserId()
     {

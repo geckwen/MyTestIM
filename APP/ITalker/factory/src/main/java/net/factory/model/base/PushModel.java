@@ -3,7 +3,7 @@ package net.factory.model.base;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.factory.main.Factory;
+import net.factory.present.present.Factory;
 
 
 import java.lang.reflect.Type;

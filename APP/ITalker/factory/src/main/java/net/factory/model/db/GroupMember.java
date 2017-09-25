@@ -78,6 +78,22 @@ public class GroupMember extends BaseModel {
         this.user = user;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

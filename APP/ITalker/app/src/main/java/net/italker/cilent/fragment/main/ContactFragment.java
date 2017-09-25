@@ -10,16 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import net.common.app.BaseFragment;
 import net.common.app.PresentFragment;
-import net.common.factory.present.BaseContract;
 import net.common.widget.recycle.AdapterCallBack;
 import net.common.widget.recycle.EmptyView;
 import net.common.widget.recycle.RecycleAdapter;
 import net.common.widget.recycle.a.PortraitView;
-import net.factory.main.present.contact.ContactContract;
-import net.factory.main.present.contact.ContactPresent;
-import net.factory.model.card.UserCard;
+import net.factory.present.present.contact.ContactContract;
+import net.factory.present.present.contact.ContactPresent;
 import net.factory.model.db.User;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MessageActivity;

@@ -7,10 +7,9 @@ import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import net.common.app.BaseFragment;
 import net.common.app.PresentFragment;
-import net.factory.main.present.account.LoginContract;
-import net.factory.main.present.account.LoginPresent;
+import net.factory.present.present.account.LoginContract;
+import net.factory.present.present.account.LoginPresent;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MainActivity;
 import net.qiujuer.genius.ui.widget.Button;

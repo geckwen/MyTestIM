@@ -17,14 +17,10 @@ import com.bumptech.glide.Glide;
 import com.yalantis.ucrop.UCrop;
 
 import net.common.app.Application;
-import net.common.app.BaseFragment;
 import net.common.app.PresentFragment;
-import net.common.factory.present.BaseContract;
 import net.common.widget.recycle.a.PortraitView;
-import net.factory.main.Factory;
-import net.factory.main.present.user.UpUserInfoContract;
-import net.factory.main.present.user.UpUserInfoPrensent;
-import net.factory.net.UploadHelper;
+import net.factory.present.present.user.UpUserInfoContract;
+import net.factory.present.present.user.UpUserInfoPrensent;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MainActivity;
 import net.italker.cilent.fragment.media.GalleyFragment;

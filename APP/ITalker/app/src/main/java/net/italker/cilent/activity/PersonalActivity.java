@@ -17,19 +17,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import net.common.app.BaseActivity;
 import net.common.app.PresentToolBarActivity;
-import net.common.app.ToolBarActivity;
-import net.common.model.Author;
 import net.common.widget.recycle.a.PortraitView;
-import net.factory.main.present.contact.PersonalContract;
-import net.factory.main.present.contact.PersonalPresent;
+import net.factory.present.present.contact.PersonalContract;
+import net.factory.present.present.contact.PersonalPresent;
 import net.factory.model.db.User;
 import net.italker.cilent.R;
 import net.qiujuer.genius.ui.widget.Button;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 import butterknife.BindView;
@@ -133,8 +128,7 @@ public class PersonalActivity extends PresentToolBarActivity<PersonalContract.Pr
     public void onLoadDone(User user) {
         if(user==null)
         return;
-        Socket socket;
-        socket.getOutputStream()
+
         mName.setText(user.getName());
         mDes.setText(user.getDesc());
         mPortrait.setPortraitView(Glide.with(this),user);

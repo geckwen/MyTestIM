@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import net.common.app.PresentFragment;
-import net.factory.main.present.account.RegisterContract;
-import net.factory.main.present.account.RegisterPresent;
+import net.factory.present.present.account.RegisterContract;
+import net.factory.present.present.account.RegisterPresent;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MainActivity;
 import net.qiujuer.genius.ui.widget.Loading;
