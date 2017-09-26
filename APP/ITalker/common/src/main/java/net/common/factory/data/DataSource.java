@@ -24,4 +24,8 @@ public interface DataSource {
         //数据加载失败，网络请求失败
         void onDataNotAvaliable(@StringRes int res);
     }
+    /**
+     * 销毁操作
+     */
+    void dispose();
 }

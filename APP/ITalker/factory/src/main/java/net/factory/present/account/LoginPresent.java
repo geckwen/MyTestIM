@@ -1,4 +1,4 @@
-package net.factory.present.present.account;
+package net.factory.present.account;
 
 
 import android.support.annotation.StringRes;

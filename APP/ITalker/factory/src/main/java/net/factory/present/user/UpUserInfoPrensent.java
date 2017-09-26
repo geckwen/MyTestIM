@@ -1,4 +1,4 @@
-package net.factory.present.present.user;
+package net.factory.present.user;
 
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
@@ -8,7 +8,7 @@ import net.common.factory.data.DataSource;
 import net.common.factory.present.BasePresent;
 import net.common.tools.UiShow;
 import net.factory.R;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.model.card.UserCard;
 import net.factory.model.db.User;
 import net.factory.model.user.UpdateInfoModel;

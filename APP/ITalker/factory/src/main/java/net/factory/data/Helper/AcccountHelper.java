@@ -6,8 +6,7 @@ import android.text.TextUtils;
 
 import net.common.factory.data.DataSource;
 import net.factory.R;
-import net.factory.present.present.Factory;
-import net.factory.data.DBHelper;
+import net.factory.present.Factory;
 import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.api.account.LoginModel;
 import net.factory.model.api.account.RegisterModel;

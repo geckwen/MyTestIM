@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 
 @Table(database =  AppDatabase.class)
-public class GroupMember extends BaseModel {
+public class GroupMember extends BaseDbModel<GroupMember> {
     public static final int NOTIFY_LEVEL_INVALID = -1; // 关闭消息
     public static final int NOTIFY_LEVEL_NONE = 0; // 正常
 
@@ -115,4 +115,15 @@ public class GroupMember extends BaseModel {
         return id != null ? id.hashCode() : 0;
     }
 
+    @Override
+    public boolean isSame(GroupMember old) {
+        return Objects.equals(id,old.getId());
+    }
+
+    @Override
+    public boolean isUiContentSame(GroupMember old) {
+             return isAdmin == old.isAdmin
+                && Objects.equals(alias, old.alias)
+                && Objects.equals(updateAt, old.updateAt);
+    }
 }

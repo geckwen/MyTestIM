@@ -1,8 +1,8 @@
-package net.factory.present.present.contact;
+package net.factory.present.contact;
 
 import net.common.factory.present.BasePresent;
 import net.common.tools.UiShow;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.model.db.User;
 import net.factory.data.Helper.ContactHelper;
 import net.factory.persistence.Account;

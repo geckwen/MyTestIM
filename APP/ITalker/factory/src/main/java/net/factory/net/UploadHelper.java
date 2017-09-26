@@ -17,7 +17,7 @@ import com.alibaba.sdk.android.oss.model.PutObjectResult;
 
 import net.common.utils.HashUtil;
 
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 
 import java.io.File;
 import java.util.Date;

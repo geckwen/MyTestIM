@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 
 @Table(database = AppDatabase.class)
-public class Message extends BaseModel implements DiffUiDataCallback.UiDataDiffer<Message> {
+public class Message extends BaseDbModel<Message>{
     // 接收者类型
     public static final int RECEIVER_TYPE_NONE = 1;
     public static final int RECEIVER_TYPE_GROUP = 2;

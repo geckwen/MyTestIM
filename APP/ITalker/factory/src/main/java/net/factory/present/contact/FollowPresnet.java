@@ -1,4 +1,4 @@
-package net.factory.present.present.contact;
+package net.factory.present.contact;
 
 import android.support.annotation.StringRes;
 

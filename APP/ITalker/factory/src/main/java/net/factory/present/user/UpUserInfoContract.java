@@ -1,4 +1,4 @@
-package net.factory.present.present.user;
+package net.factory.present.user;
 
 import net.common.factory.present.BaseContract;
 

@@ -2,7 +2,7 @@ package net.factory.data.Helper;
 
 import net.common.factory.data.DataSource;
 import net.factory.R;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.model.base.RspModel;
 import net.factory.model.card.UserCard;
 import net.factory.model.user.UpdateInfoModel;

@@ -4,7 +4,7 @@ import com.igexin.sdk.PushManager;
 
 
 import net.common.app.Application;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 
 /**
  * Created by CLW on 2017/8/15.

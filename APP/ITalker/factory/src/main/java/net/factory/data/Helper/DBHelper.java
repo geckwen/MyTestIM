@@ -1,6 +1,4 @@
-package net.factory.data;
-
-import android.graphics.PorterDuff;
+package net.factory.data.Helper;
 
 import com.raizlabs.android.dbflow.config.DatabaseDefinition;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -12,15 +10,14 @@ import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 
 import net.common.utils.CollectionUtil;
-import net.factory.data.Helper.SessionHelper;
 import net.factory.model.db.AppDatabase;
+import net.factory.model.db.BaseDbModel;
 import net.factory.model.db.Group;
 import net.factory.model.db.GroupMember;
 import net.factory.model.db.Group_Table;
 import net.factory.model.db.Message;
 import net.factory.model.db.Session;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 数据库操作
  * Created by CLW on 2017/9/22.
  */
 
@@ -54,7 +52,7 @@ public class DBHelper {
      * @param <Model> 继承bassemodel
      * @return 如果有则返回表对应的观察者集合，否则则为
      */
-    private static<Model extends BaseModel> Set<ChangeListener> getListeners(Class<Model> tclass)
+    private static<Model extends BaseDbModel> Set<ChangeListener> getListeners(Class<Model> tclass)
     {
         if(dbHelper.changeListeners.containsKey(tclass)) {
             return changeListeners.get(tclass);
@@ -68,7 +66,7 @@ public class DBHelper {
      * @param changeListener 观察者
      * @param <Model> 继承自Basemodel的信息
      */
-    public static <Model extends BaseModel> void addListener(final Class<Model> tclass,ChangeListener changeListener)
+    public static <Model extends BaseDbModel> void addListener(final Class<Model> tclass, ChangeListener changeListener)
     {
         Set<ChangeListener> changeListeners = getListeners(tclass);
         if(changeListeners==null) {
@@ -84,7 +82,7 @@ public class DBHelper {
      * @param changeListener 观察者
      * @param <Model> 继承自Basemodel的信息
      */
-    public static <Model extends BaseModel> void removeListener(final Class<Model> tclass,ChangeListener changeListener)
+    public static <Model extends BaseDbModel> void removeListener(final Class<Model> tclass,ChangeListener changeListener)
     {
         Set<ChangeListener> changeListeners = getListeners(tclass);
         if(changeListeners==null) {
@@ -99,7 +97,7 @@ public class DBHelper {
      * @param models models
      * @param <Model> 泛型
      */
-    public static<Model extends BaseModel> void save(final Class<Model> tclass, final Model... models)
+    public static<Model extends BaseDbModel> void save(final Class<Model> tclass, final Model... models)
     {
         if(models==null||models.length==0)
             return;
@@ -123,7 +121,7 @@ public class DBHelper {
      * @param models models
      * @param <Model> 泛型
      */
-    public static<Model extends BaseModel> void delete(final Class<Model> tclass, final Model... models)
+    public static<Model extends BaseDbModel> void delete(final Class<Model> tclass, final Model... models)
     {
         if(models==null||models.length==0)
             return;
@@ -146,7 +144,7 @@ public class DBHelper {
      * @param models models
      * @param <Model> 泛型
      */
-    public <Model extends BaseModel> void notifySave(final Class<Model> tclass, final Model... models)
+    public <Model extends BaseDbModel> void notifySave(final Class<Model> tclass, final Model... models)
     {
         //TODO 通知保存
        final Set<ChangeListener> changeListeners = getListeners(tclass);
@@ -173,7 +171,7 @@ public class DBHelper {
      * @param models models
      * @param <Model> 泛型
      */
-    public <Model extends BaseModel> void notifyDelete(final Class<Model> tclass, final Model... models)
+    public <Model extends BaseDbModel> void notifyDelete(final Class<Model> tclass, final Model... models)
     {
         //TODO 通知删除
         final Set<ChangeListener> changeListeners = getListeners(tclass);
@@ -268,7 +266,7 @@ public class DBHelper {
 
 
 
-    public interface ChangeListener<Data>
+    public interface ChangeListener<Data extends BaseDbModel>
     {
         //通知观察者 信息存储
         void onDataSave(Data... datas);

@@ -1,4 +1,4 @@
-package net.factory.present.present.search;
+package net.factory.present.search;
 
 import net.common.factory.present.BaseContract;
 import net.factory.model.card.UserCard;

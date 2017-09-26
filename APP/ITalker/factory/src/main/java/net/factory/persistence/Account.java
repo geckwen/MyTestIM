@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import net.factory.model.db.User_Table;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.db.User;
 

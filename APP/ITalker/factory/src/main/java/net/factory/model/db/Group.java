@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 
 @Table(database = AppDatabase.class)
-public class Group extends BaseModel implements DiffUiDataCallback.UiDataDiffer<Group> {
+public class Group extends BaseDbModel<Group> {
 
     @PrimaryKey
     private String id;

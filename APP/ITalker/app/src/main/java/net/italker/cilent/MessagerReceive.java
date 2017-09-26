@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.igexin.sdk.PushConsts;
 
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.data.Helper.AcccountHelper;
 import net.factory.persistence.Account;
 

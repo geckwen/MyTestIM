@@ -2,7 +2,7 @@ package net.factory.data.message;
 
 import android.text.TextUtils;
 
-import net.factory.data.DBHelper;
+import net.factory.data.Helper.DBHelper;
 import net.factory.data.Helper.ContactHelper;
 import net.factory.data.Helper.GroupHelper;
 import net.factory.data.Helper.MessageHelper;

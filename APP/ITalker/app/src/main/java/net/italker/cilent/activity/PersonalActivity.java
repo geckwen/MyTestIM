@@ -19,13 +19,11 @@ import com.bumptech.glide.Glide;
 
 import net.common.app.PresentToolBarActivity;
 import net.common.widget.recycle.a.PortraitView;
-import net.factory.present.present.contact.PersonalContract;
-import net.factory.present.present.contact.PersonalPresent;
+import net.factory.present.contact.PersonalContract;
+import net.factory.present.contact.PersonalPresent;
 import net.factory.model.db.User;
 import net.italker.cilent.R;
 import net.qiujuer.genius.ui.widget.Button;
-
-import java.net.Socket;
 
 import butterknife.BindView;
 import butterknife.OnClick;

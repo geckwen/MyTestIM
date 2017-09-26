@@ -1,6 +1,6 @@
 package net.factory.data.Group;
 
-import net.factory.data.DBHelper;
+import net.factory.data.Helper.DBHelper;
 import net.factory.data.Helper.ContactHelper;
 import net.factory.data.Helper.GroupHelper;
 import net.factory.model.card.GroupCard;

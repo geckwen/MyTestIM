@@ -4,8 +4,8 @@ package net.italker.cilent.fragment.search;
 
 
 import net.common.app.PresentFragment;
-import net.factory.present.present.search.GroupPresent;
-import net.factory.present.present.search.SearchContract;
+import net.factory.present.search.GroupPresent;
+import net.factory.present.search.SearchContract;
 import net.factory.model.card.UserCard;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.SearchActivity;

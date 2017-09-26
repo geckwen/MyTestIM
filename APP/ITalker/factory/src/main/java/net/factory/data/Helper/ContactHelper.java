@@ -2,11 +2,10 @@ package net.factory.data.Helper;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
-import net.common.factory.data.DataSource;
 import net.common.utils.CollectionUtil;
 
 import net.factory.model.db.User_Table;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.model.base.RspModel;
 import net.factory.model.card.UserCard;
 import net.factory.model.db.User;
@@ -52,7 +51,7 @@ public class ContactHelper {
 
                 @Override
                 public void onFailure(Call<RspModel<List<UserCard>>> call, Throwable t) {
-                  /* callback.onDataNotAvaliable(R.string.data_rsp_error_service);*/
+
                 }
             });
         }

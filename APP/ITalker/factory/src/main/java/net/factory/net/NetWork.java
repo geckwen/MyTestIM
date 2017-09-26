@@ -3,7 +3,7 @@ package net.factory.net;
 import android.text.TextUtils;
 
 import net.common.Common;
-import net.factory.present.present.Factory;
+import net.factory.present.Factory;
 import net.factory.persistence.Account;
 
 import java.io.IOException;
