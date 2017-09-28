@@ -12,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.google.gson.annotations.Expose;
 
 import net.qintalk.italker.push.bean.db.Group;
 import net.qintalk.italker.push.bean.db.Message;
@@ -19,24 +20,25 @@ import net.qintalk.italker.push.bean.db.User;
 import net.qintalk.italker.push.utils.TextUtil;
 
 public class MessageCreateModel {
-
+	@Expose
     private String id;
 
     // 内容不允许为空，类型为text
-   
+	@Expose
     private String content;
 
     // 附件
-  
+	@Expose
     private String attach;
 
     // 消息类型
+	@Expose
     private int type=Message.TYPE_STR;
 
-    private String senderId;
-
+    
+	@Expose
     private String receiverId;
-
+	@Expose
     private int receiverType = Message.TYPE_RECEIVER_USER;
 
 	public String getId() {
@@ -71,13 +73,8 @@ public class MessageCreateModel {
 		this.type = type;
 	}
 
-	public String getSenderId() {
-		return senderId;
-	}
+	
 
-	public void setSenderId(String senderId) {
-		this.senderId = senderId;
-	}
 
 	public String getReceiverId() {
 		return receiverId;

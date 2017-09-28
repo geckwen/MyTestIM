@@ -49,7 +49,7 @@ public class PushDispatcher {
 	 * @return 
 	 * @throws Exception
 	 */
-	public  boolean add(User recevice, PushModel pushModel) throws Exception {
+	public  boolean add(User recevice, PushModel pushModel) {
 		if(recevice==null||!TextUtil.StringNotEmpty(recevice.getPushId())||pushModel==null)
 			return false;
 		
@@ -57,7 +57,13 @@ public class PushDispatcher {
 		if(!TextUtil.StringNotEmpty(msg))
 			return false;
 		
-		BeanBatch beanBatch =constructClientTransMsg(recevice.getPushId(), msg);
+		BeanBatch beanBatch=null;
+		try {
+			beanBatch = constructClientTransMsg(recevice.getPushId(), msg);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		beanBatchs.add(beanBatch);
 		return true;
 	}

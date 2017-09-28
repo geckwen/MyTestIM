@@ -71,20 +71,19 @@ public class MessageService {
 		if(receiver.getId().equals(sender.getId()))
 			return ResponseModel.buildCreateError(ResponseModel.ERROR_CREATE_MESSAGE);
 		Message message = MessageFactory.add(sender, receiver, messageCreateModel);
-		
 		return buildPushResponse(sender,message);
 	}
 
 	
-
+	//发送到群
 	private ResponseModel<MessageCard> pushGroup(User sender, MessageCreateModel messageCreateModel) {
-		Group group = GroupFactory.findById(messageCreateModel.getReceiverId());
+		Group group = GroupFactory.findById(sender,messageCreateModel.getReceiverId());
 		if(group==null)
 			return ResponseModel.buildNotFoundUserError("Can't find receiver user");
 		Message message = MessageFactory.add(sender, group, messageCreateModel);
 		if(message==null)
 			return ResponseModel.buildServiceError();
-		return ResponseModel.buildOk(new MessageCard(message));
+		return buildPushResponse(sender,message);
 	}
 	
 	private ResponseModel<MessageCard> buildPushResponse(User sender, Message message) {
