@@ -291,9 +291,6 @@ public class UserFactory {
 				session.load(self,self.getId());
 				Set<UserFollow> following = self.getFollowing();
 				Set<UserFollow> followers = self.getFollowers();
-				followers.stream().map(follow->{
-					return follow.getTarget();
-				}).collect(Collectors.toList());
 				return following.stream().map(follow->{
 					return follow.getTarget();
 				}).collect(Collectors.toList());

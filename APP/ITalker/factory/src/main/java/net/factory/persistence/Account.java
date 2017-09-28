@@ -23,7 +23,7 @@ public class Account {
     private  static  final String KEY_USER_ACCOUNT = "KEY_USER_ACCOUNT ";
     private  static  final String KEY_USER_TOKEN = "KEY_USER_TOKEN";
     private  static  final String KEY_USER_ID = "KEY_USER_ID";
-    private static String pushId ="test" ;//个推ID
+    private static String pushId  ;//个推ID
     private static  boolean isBind ;
     //用户的token
     private static String token;

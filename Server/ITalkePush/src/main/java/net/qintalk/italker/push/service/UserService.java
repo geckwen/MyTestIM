@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
+import net.qintalk.italker.push.bean.api.base.PushModel;
+import net.qintalk.italker.push.bean.api.base.PushModel.Entity;
 import net.qintalk.italker.push.bean.api.base.ResponseModel;
 import net.qintalk.italker.push.bean.card.UserCard;
 import net.qintalk.italker.push.bean.db.User;
@@ -22,6 +24,7 @@ import net.qintalk.italker.push.bean.db.UserFollow;
 import net.qintalk.italker.push.bean.user.UpdateInfoModel;
 import net.qintalk.italker.push.factory.UserFactory;
 import net.qintalk.italker.push.utils.LocalUser;
+import net.qintalk.italker.push.utils.PushDispatcher;
 
 /**
  * 用户进行数据操作
@@ -66,7 +69,7 @@ public class UserService extends BaseService {
 	 * @return 返回一个带有用户关注的列表的responsemodel
 	 */
 	//127.0.0.1/api/user/contract
-	@Path("/contract")
+	@Path("/contact")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -74,6 +77,16 @@ public class UserService extends BaseService {
 	{
 		User self = LocalUser.getLocalUser();
 		List<User> users = UserFactory.getFollows(self);
+		PushDispatcher pushDispatcher =PushDispatcher.getInstance();
+		PushModel pushModel = new PushModel();
+		pushModel.add(0, "hello world");
+		try {
+			pushDispatcher.add(self, pushModel);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pushDispatcher.submit();
 		List<UserCard> userCards = users.stream().map(user->{
 			return new UserCard(user,true);
 		}).collect(Collectors.toList());
@@ -147,7 +160,7 @@ public class UserService extends BaseService {
 			boolean isFollow = user.getId().equalsIgnoreCase(self.getId())||
 					//查询是否里面有自己好友,如果有则显示已关注
 					contracts.stream()
-					.anyMatch(contract->contract.getId().equalsIgnoreCase(self.getId()));
+					.anyMatch(contract->contract.getId().equalsIgnoreCase(user.getId()));
 			return new UserCard(user,isFollow);
 		}).collect(Collectors.toList());
 		

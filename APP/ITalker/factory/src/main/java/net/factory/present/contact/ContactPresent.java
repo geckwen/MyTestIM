@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ContactPresent extends BaseSourcePresent<User,User,ContactDataSource,
         ContactContract.ContactView>
-        implements DataSource.SuccessCallback<List<User>> {
+        implements DataSource.SuccessCallback<List<User>>,ContactContract.Present{
 
     private ContactDataSource contactDataSource;
 

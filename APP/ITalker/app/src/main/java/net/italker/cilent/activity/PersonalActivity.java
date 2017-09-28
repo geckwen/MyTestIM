@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -41,7 +43,7 @@ public class PersonalActivity extends PresentToolBarActivity<PersonalContract.Pr
     TextView mName;
     @BindView(R.id.im_portrait)
     PortraitView mPortrait;
-    @BindView(R.id.txt_des)
+    @BindView(R.id.txt_desc)
     TextView mDes;
     @BindView(R.id.btn_say_hello)
     Button mBtnHello;
@@ -62,7 +64,6 @@ public class PersonalActivity extends PresentToolBarActivity<PersonalContract.Pr
     }
 
 
-
     @Override
     public int getContentLayoutId() {
         return R.layout.activity_personal;
@@ -71,13 +72,20 @@ public class PersonalActivity extends PresentToolBarActivity<PersonalContract.Pr
     @Override
     protected boolean initArgs(Bundle bundle) {
         userId = bundle.getString(BOUND_KEY_ID);
-        return TextUtils.isEmpty(userId);
+        return !TextUtils.isEmpty(userId);
     }
 
     @Override
     public void initWidget() {
         super.initWidget();
         setTitle("");
+    }
+
+
+    @Override
+    public void initData() {
+        super.initData();
+        mPresent.start();
     }
 
     @Override

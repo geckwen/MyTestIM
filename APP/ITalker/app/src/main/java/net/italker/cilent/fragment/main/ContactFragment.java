@@ -73,20 +73,7 @@ public class ContactFragment extends PresentFragment<ContactContract.Present> im
 
     }
 
-    @Override
-    public void showError(@StringRes int str) {
 
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void setPresent(ContactContract.Present present) {
-
-    }
 
     @Override
     public RecycleAdapter<User> getRecycleAdapter() {

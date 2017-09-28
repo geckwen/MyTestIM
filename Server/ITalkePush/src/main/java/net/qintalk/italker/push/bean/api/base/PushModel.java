@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author qiujuer Email:qiujuer.live.cn
  */
-@SuppressWarnings("WeakerAccess")
+
 public class PushModel {
     public static final int ENTITY_TYPE_LOGOUT = -1;
     public static final int ENTITY_TYPE_MESSAGE = 200;

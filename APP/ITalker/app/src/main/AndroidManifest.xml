@@ -49,6 +49,18 @@
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransStatusBar" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:label="@string/title_activity_message" />
+        <activity
+            android:name=".activity.PersonalActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_personal"
+            android:theme="@style/AppTheme.TransStatusBar" />
         <!-- 个推的广播接收注册 -->
         <receiver
             android:name=".MessagerReceive"
@@ -60,18 +72,7 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".activity.SearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransStatusBar" />
-        <activity
-            android:name=".activity.MessageActivity"
-            android:label="@string/title_activity_message" />
-        <activity
-            android:name=".activity.PersonalActivity"
-            android:label="@string/title_activity_personal"
-            android:theme="@style/AppTheme.TransStatusBar"
-            />
+
     </application>
 
 </manifest>

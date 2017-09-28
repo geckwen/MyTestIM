@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import android.os.Looper;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -74,6 +75,7 @@ public class UpdateInfoFragment extends PresentFragment<UpUserInfoContract.Prese
     @OnClick(R.id.im_portrait)
      void onPortraitClick()
      {
+         Looper
         new GalleyFragment().registerListener(new GalleyFragment.OnSelectListener() {
             @Override
             public void onSelectImage(String path) {

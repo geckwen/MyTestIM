@@ -170,6 +170,7 @@ public class UserCard {
 			user.setDesc(description);
 			user.setModifyAt(updateAt);
 			user.setSex(sex);
+			user.setFollow(isfollow);
 			this.user = user;
 		}
 		return user;

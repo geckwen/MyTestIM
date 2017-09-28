@@ -1,5 +1,7 @@
 package net.factory.data.Helper;
 
+import android.util.Log;
+
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import net.common.utils.CollectionUtil;
@@ -25,7 +27,7 @@ import retrofit2.Response;
  */
 
 public class ContactHelper {
-
+    private  static  final  String TAG = ContactHelper.class.getName();
     /**
      * 拉取联系人
      */
@@ -51,7 +53,7 @@ public class ContactHelper {
 
                 @Override
                 public void onFailure(Call<RspModel<List<UserCard>>> call, Throwable t) {
-
+                    Log.e(TAG,"服务器错误");
                 }
             });
         }

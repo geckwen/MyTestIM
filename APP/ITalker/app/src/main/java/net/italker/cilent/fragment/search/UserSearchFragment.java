@@ -155,7 +155,7 @@ public class UserSearchFragment extends PresentFragment<SearchContract.Present>
 
     @Override
     public void search(String query) {
-
+        mPresent.search(query);
     }
 
     @Override

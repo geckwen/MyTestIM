@@ -4,6 +4,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import net.qintalk.italker.push.bean.api.account.MessageCreateModel;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,8 +16,11 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TB_MESSAGE")
 public class Message {
+	public static final int TYPE_RECEIVER_USER=1;
+	public static final int TYPE_RECEIVER_GROUP=2;
+	
     public static final int TYPE_STR = 1; // 字符串类型
-    public static final int TYPE_PIC = 1; // 图片类型
+    public static final int TYPE_PIC = 2; // 图片类型
     public static final int TYPE_FILE = 3; // 文件类型
     public static final int TYPE_AUDIO = 4; // 语音类型
 
@@ -178,5 +183,31 @@ public class Message {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+    
+    //普通朋友的发送消息构造函数
+    public Message(User sender,User receiver,MessageCreateModel messageCreateModel)
+    {
+    	this.id=messageCreateModel.getId();
+    	this.attach = messageCreateModel.getAttach();
+    	this.type = messageCreateModel.getType();
+    	this.content = messageCreateModel.getContent();
+    	
+    	this.sender = sender;
+    	this.receiver = receiver;
+    	
+    }
+    
+    //对群发送消息的构造函数
+    public Message(User sender,Group group,MessageCreateModel messageCreateModel)
+    {
+    	this.id=messageCreateModel.getId();
+    	this.attach = messageCreateModel.getAttach();
+    	this.type = messageCreateModel.getType();
+    	this.content = messageCreateModel.getContent();
+    	
+    	this.sender = sender;
+    	this.group = group;
+    	
     }
 }

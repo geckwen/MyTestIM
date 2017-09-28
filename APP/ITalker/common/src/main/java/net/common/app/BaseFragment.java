@@ -24,7 +24,7 @@ public  abstract class BaseFragment extends Fragment  {
     protected Unbinder mRootBinder;
     protected PlaceHolderView mplaceHolderView;
     //是否第一次初始化数据操作
-    private boolean mIsFirstInitData;
+    private boolean mIsFirstInitData=true;
 
     @Override
     public void onAttach(Context context) {

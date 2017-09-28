@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.igexin.sdk.PushConsts;
 
@@ -17,6 +18,7 @@ import net.factory.persistence.Account;
  */
 
 public class MessagerReceive extends BroadcastReceiver {
+    private static final String TAG = MessagerReceive.class.getName();
     @Override
     public void onReceive(Context context, Intent intent) {
         if(intent == null)
@@ -29,7 +31,7 @@ public class MessagerReceive extends BroadcastReceiver {
             case PushConsts.GET_CLIENTID:
                 //当ID初始化时候
                 //获取设备ID
-                onCilentInt(bundle.getString("cilentId"));
+                onCilentInt(bundle.getString("clientId"));
                 break;
             case  PushConsts.GET_MSG_DATA:
                 //常规信息传递时候
@@ -37,6 +39,7 @@ public class MessagerReceive extends BroadcastReceiver {
                 if(payload != null)
                 {
                     String message = new String(payload);
+                    Log.e(TAG,"GET_MSG_DATA:"+message);
                     onMessageArrived(message);
                 }
                 break;
@@ -46,7 +49,7 @@ public class MessagerReceive extends BroadcastReceiver {
     }
 
     /**当ID设备初始化的时候
-     * @param cId 设备ID
+     * @param cid 设备ID
      */
     public void onCilentInt(String cid)
     {
