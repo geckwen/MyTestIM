@@ -23,7 +23,7 @@ public class Message extends BaseDbModel<Message>{
     public static final int RECEIVER_TYPE_GROUP = 2;
 
     public static final int TYPE_STR = 1; // 字符串类型
-    public static final int TYPE_PIC = 1; // 图片类型
+    public static final int TYPE_PIC = 2; // 图片类型
     public static final int TYPE_FILE = 3; // 文件类型
     public static final int TYPE_AUDIO = 4; // 语音类型
     // 消息状态

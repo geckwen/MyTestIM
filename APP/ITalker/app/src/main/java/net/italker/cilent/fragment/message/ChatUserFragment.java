@@ -33,17 +33,6 @@ public class ChatUserFragment extends ChatFragment {
     @BindView(R.id.im_portrait)
     PortraitView mPortraitView;
 
-    @BindView(R.id.txt_send)
-    EditText mContent;
-
-    @BindView(R.id.btn_submit)
-    ImageView submit;
-
-    @BindView(R.id.btn_record)
-    ImageView mRecord;
-
-    @BindView(R.id.btn_emoj)
-    ImageView mEmoj;
 
     MenuItem mUserMenusInfo;
 
@@ -97,31 +86,9 @@ public class ChatUserFragment extends ChatFragment {
         PersonalActivity.show(getContext(),mReceiverId);
     }
 
-    @OnClick(R.id.btn_record)
-    void onRecord()
-    {
-        //TODO 录音
-    }
 
-    @OnClick(R.id.btn_emoj)
-    void onEmoj()
-    {
 
-    }
 
-    @OnClick(R.id.btn_submit)
-    void onSendClick(){
-        if(submit.isActivated())
-        {
-            //TODO 发送
-        }else{
-            //TODO  分享
-        }
-    }
-
-    void onMoreClick(){
-
-    }
 
 
     @Override

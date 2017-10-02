@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,6 +46,18 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
 
     @BindView(R.id.appbar)
     AppBarLayout  mAppBarLayout;
+
+    @BindView(R.id.txt_send)
+    EditText mContent;
+
+    @BindView(R.id.btn_submit)
+    ImageView submit;
+
+    @BindView(R.id.btn_record)
+    ImageView mRecord;
+
+    @BindView(R.id.btn_emoj)
+    ImageView mEmoj;
 
     @Override
     protected void initArgs(Bundle bundle) {
@@ -97,6 +111,15 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
                 case R.layout.cell_chat_text_left:
                 case R.layout.cell_chat_text_right:
                     return  new TextHolder(view);
+                case R.layout.cell_chat_audio_left:
+                case R.layout.cell_chat_audio_right:
+                    return  new AudioHolder(view);
+                case R.layout.cell_chat_pic_left:
+                case R.layout.cell_chat_pic_right:
+                    return  new PicHolder(view);
+
+                default:
+                    return new TextHolder(view);
             }
         }
 
@@ -107,8 +130,43 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
             {
                 case Message.TYPE_STR:
                     return isSelf?R.layout.cell_chat_text_right:R.layout.cell_chat_text_left;
+                case Message.TYPE_AUDIO:
+                    return  isSelf?R.layout.cell_chat_audio_right:R.layout.cell_chat_audio_left;
+                case Message.TYPE_PIC:
+                    return isSelf?R.layout.cell_chat_pic_right:R.layout.cell_chat_pic_left;
+                default:
+                    return isSelf?R.layout.cell_chat_text_right:R.layout.cell_chat_text_left;
+
             }
         }
+    }
+
+    @OnClick(R.id.btn_record)
+    void onRecord()
+    {
+        //TODO 录音
+    }
+
+    @OnClick(R.id.btn_emoj)
+    void onEmoj()
+    {
+
+    }
+
+    @OnClick(R.id.btn_submit)
+    void onSendClick(){
+        if(submit.isActivated())
+        {
+            //TODO 发送
+        }else{
+            //TODO  分享
+            onMoreClick();
+        }
+    }
+
+
+    void onMoreClick(){
+
     }
 
     class BaseHolder extends RecycleAdapter.MyViewHolder<Message>{
@@ -121,7 +179,7 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
         @BindView(R.id.loading)
         Loading loading;
 
-        public MyHolder(View itemView) {
+        public BaseHolder(View itemView) {
             super(itemView);
         }
 
@@ -183,6 +241,27 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
             super.OnBind(data);
             mContent.setText(data.getContent());
 
+        }
+    }
+
+    class AudioHolder extends BaseHolder{
+
+        public AudioHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    class PicHolder extends BaseHolder{
+
+        public AudioHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    class EmojHolder extends  BaseHolder{
+
+        public EmojHolder(View itemView) {
+            super(itemView);
         }
     }
 
