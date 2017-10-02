@@ -75,7 +75,7 @@ public class UpdateInfoFragment extends PresentFragment<UpUserInfoContract.Prese
     @OnClick(R.id.im_portrait)
      void onPortraitClick()
      {
-         Looper
+
         new GalleyFragment().registerListener(new GalleyFragment.OnSelectListener() {
             @Override
             public void onSelectImage(String path) {

@@ -131,12 +131,14 @@ public class UserService extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResponseModel<UserCard> getUser(@PathParam("id") String id)
 	{
-		if(LocalUser.getLocalUser().getId().equals(id))
+		User origin = LocalUser.getLocalUser();
+		if(origin.getId().equals(id))
 			return ResponseModel.buildParameterError();
+		
 		User target = UserFactory.findById(id);
 		if(target==null)
 			return ResponseModel.buildNotFoundUserError(null);
-		UserFollow userFollow = UserFactory.getUserFollow(gerSelf(), target);
+		UserFollow userFollow = UserFactory.getUserFollow(origin, target);
 		if(userFollow!=null)
 			return ResponseModel.buildOk(new UserCard(target,true));
 		return ResponseModel.buildOk(new UserCard(target));

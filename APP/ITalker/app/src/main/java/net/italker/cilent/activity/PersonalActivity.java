@@ -102,8 +102,6 @@ public class PersonalActivity extends PresentToolBarActivity<PersonalContract.Pr
         if(item.getItemId()== R.id.action_follow)
         {
             //TODO 进行关注操作
-
-
             return true;
         }
         return super.onOptionsItemSelected(item);
