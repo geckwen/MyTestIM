@@ -259,10 +259,7 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
         public MyViewHolder(View itemView) {
             super(itemView);
         }
-        public MyViewHolder(View itemView,AdapterCallBack adapterCallBack) {
-            super(itemView);
-            this.adapterCallBack = adapterCallBack;
-        }
+
 
 
         /** 用于绑定数据的触发

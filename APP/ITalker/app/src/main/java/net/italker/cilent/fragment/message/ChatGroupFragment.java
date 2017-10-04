@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.common.app.BaseFragment;
+import net.factory.model.db.Group;
+import net.factory.present.message.ChatContract;
+import net.factory.present.message.ChatGroupPresent;
 import net.italker.cilent.R;
 
 /**
@@ -20,7 +23,7 @@ import net.italker.cilent.R;
  * Use the {@link ChatGroupFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChatGroupFragment extends ChatFragment {
+public class ChatGroupFragment extends ChatFragment<Group> implements ChatContract.GroupView {
 
 
     public ChatGroupFragment() {
@@ -37,6 +40,11 @@ public class ChatGroupFragment extends ChatFragment {
     }
 
     @Override
+    protected ChatContract.Present initPresent() {
+        return new ChatGroupPresent(this);
+    }
+
+    @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_chat_group;
     }
@@ -49,6 +57,11 @@ public class ChatGroupFragment extends ChatFragment {
 
     @Override
     protected void initEditContent() {
+
+    }
+
+    @Override
+    public void init(Group group) {
 
     }
 }

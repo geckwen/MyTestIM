@@ -4,6 +4,7 @@ package net.italker.cilent.fragment.message;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -15,10 +16,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.ViewTarget;
+
 import net.common.app.BaseFragment;
 import net.common.app.TextAdapter;
 import net.common.widget.recycle.a.PortraitView;
 import net.factory.model.db.User;
+import net.factory.present.message.ChatContract;
+import net.factory.present.message.ChatUserPresent;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.PersonalActivity;
 import net.italker.cilent.activity.UserActivity;
@@ -29,7 +37,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChatUserFragment extends ChatFragment {
+public class ChatUserFragment extends ChatFragment<User> implements ChatContract.UserView {
     @BindView(R.id.im_portrait)
     PortraitView mPortraitView;
 
@@ -87,9 +95,10 @@ public class ChatUserFragment extends ChatFragment {
     }
 
 
-
-
-
+    @Override
+    protected ChatContract.Present initPresent() {
+        return new ChatUserPresent(this,mReceiverId);
+    }
 
     @Override
     protected int getContentLayoutId() {
@@ -146,5 +155,28 @@ public class ChatUserFragment extends ChatFragment {
                 mUserMenusInfo.getIcon().setAlpha((int) (255-255*progress));
             }
         }
+    }
+
+    @Override
+    public void init(User user) {
+        //对和你聊天的用户进行初始化
+        mPortraitView.setPortraitView(Glide.with(ChatUserFragment.this),user);
+        mCollapsingToolbarLayout.setTitle(user.getName());
+    }
+
+    @Override
+    public void initWidget(View root) {
+        super.initWidget(root);
+        Glide.with(this)
+                .load(R.drawable.default_banner_chat)
+                .centerCrop()
+                .into(new ViewTarget<CollapsingToolbarLayout,GlideDrawable>(mCollapsingToolbarLayout) {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        //这个尽可能完整
+                        this.view.setContentScrim(resource.getCurrent());
+                    }
+                })
+
     }
 }

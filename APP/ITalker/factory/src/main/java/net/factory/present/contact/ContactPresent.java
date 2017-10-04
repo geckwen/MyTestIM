@@ -56,7 +56,7 @@ public class ContactPresent extends BaseSourcePresent<User,User,ContactDataSourc
         RecycleAdapter<User> adapter =view.getRecycleAdapter();
         List<User> oldList = adapter.getDataList();
         //进行数据对比
-            DiffUtil.Callback callback =new DiffUiDataCallback<User>(oldList,newList);
+            DiffUiDataCallback<User> callback =new DiffUiDataCallback<User>(oldList,newList);
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
         //进行界面的刷新
             refreshData(newList,result);

@@ -108,9 +108,7 @@ public class MessagerDiapatcher implements MessageCenter {
                     message = messageCard.build(group, sender, receiver);
                 }
                 User sender = ContactHelper.searchId(messageCard.getSenderId());
-
-
-
+                messages.add(message);
             }
             if(messages.size()>0)
                 DBHelper.save(Message.class,messages.toArray(new Message[0]));

@@ -3,6 +3,7 @@ package net.italker.cilent.fragment.message;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,11 +15,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import net.common.app.BaseFragment;
+import net.common.app.PresentFragment;
+import net.common.widget.recycle.AdapterCallBack;
 import net.common.widget.recycle.RecycleAdapter;
 import net.common.widget.recycle.a.PortraitView;
 import net.factory.model.db.Message;
 import net.factory.model.db.User;
 import net.factory.persistence.Account;
+import net.factory.present.message.ChatContract;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MessageActivity;
 import net.qiujuer.genius.ui.widget.Loading;
@@ -33,7 +37,8 @@ import butterknife.OnClick;
  * Created by CLW on 2017/9/29.
  */
 
-public  abstract  class ChatFragment extends BaseFragment implements AppBarLayout.OnOffsetChangedListener{
+public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContract.Present> implements AppBarLayout.OnOffsetChangedListener,
+        ChatContract.View<initModel>{
     protected String mReceiverId;
 
 
@@ -44,6 +49,8 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.appbar)
     AppBarLayout  mAppBarLayout;
 
@@ -59,6 +66,8 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
     @BindView(R.id.btn_emoj)
     ImageView mEmoj;
 
+    private Adapter mAdapter;
+
     @Override
     protected void initArgs(Bundle bundle) {
         super.initArgs(bundle);
@@ -73,6 +82,7 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
         initAppBar();
         initEditContent();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new Adapter();
     }
 
 
@@ -98,11 +108,20 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
         mAppBarLayout.addOnOffsetChangedListener(this);
     }
 
+    @Override
+    public RecycleAdapter<Message> getRecycleAdapter() {
+        return mAdapter;
+    }
+
+    @Override
+    public void onAdapterDataRefresh() {
+
+    }
 
     protected abstract void initEditContent();
 
 
-    class MyAdapter extends RecycleAdapter<Message>{
+    class Adapter extends RecycleAdapter<Message>{
 
         @Override
         protected MyViewHolder onCreaterViewHolde(View view, int viewType) {
@@ -158,6 +177,9 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
         if(submit.isActivated())
         {
             //TODO 发送
+            String content= mContent.getText().toString().trim();
+            mContent.setText("");
+            mPresent.pushMsg(content);
         }else{
             //TODO  分享
             onMoreClick();
@@ -169,19 +191,28 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
 
     }
 
+
+    @Override
+    public void initData() {
+        super.initData();
+        mPresent.start();
+    }
+
+
     class BaseHolder extends RecycleAdapter.MyViewHolder<Message>{
 
         @BindView(R.id.im_portrait)
         PortraitView mPortraitView;
 
-        //允许为空，左边没有,右边有
-        @Nullable
+
+                @Nullable
         @BindView(R.id.loading)
         Loading loading;
 
         public BaseHolder(View itemView) {
             super(itemView);
         }
+
 
         @Override
         protected void OnBind(Message data) {
@@ -216,11 +247,9 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
 
         @OnClick(R.id.im_portrait)
         void onClickPortrait(){
-
-
-            if(loading!=null)
-            {
-
+            if(loading!=null&&mPresent.refresh(mData)) {
+                //重新发送成功,重新刷新界面
+                updataData(mData);
             }
         }
 
@@ -235,6 +264,8 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
         public TextHolder(View itemView) {
             super(itemView);
         }
+
+
 
         @Override
         protected void OnBind(Message data) {
@@ -253,16 +284,11 @@ public  abstract  class ChatFragment extends BaseFragment implements AppBarLayou
 
     class PicHolder extends BaseHolder{
 
-        public AudioHolder(View itemView) {
+        public PicHolder(View itemView) {
             super(itemView);
         }
     }
 
-    class EmojHolder extends  BaseHolder{
 
-        public EmojHolder(View itemView) {
-            super(itemView);
-        }
-    }
 
 }

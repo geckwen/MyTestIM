@@ -1,10 +1,13 @@
 package net.factory.net;
 
+import net.factory.model.api.MessageCreateModel;
 import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.api.account.LoginModel;
 import net.factory.model.api.account.RegisterModel;
 import net.factory.model.base.RspModel;
+import net.factory.model.card.MessageCard;
 import net.factory.model.card.UserCard;
+import net.factory.model.db.Message;
 import net.factory.model.user.UpdateInfoModel;
 
 import java.util.List;
@@ -85,5 +88,11 @@ public interface RemoteService {
     @GET("user/search/{name}")
     Call<RspModel<List<UserCard>>> search(@Path(encoded = true,value = "name" )String  name);
 
+    /**
+     * 发送一条消息
+     * @return  返回mesaagecard
+     */
+    @POST("msg")
+    Call<RspModel<MessageCard>> push(@Body MessageCreateModel messageCreateModel);
 
 }
