@@ -4,7 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import net.qintalk.italker.push.bean.api.account.MessageCreateModel;
+import net.qintalk.italker.push.bean.api.message.MessageCreateModel;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -122,6 +122,11 @@ public class PushFactory {
 		}
 		
 	}
+
+	public static void pushGroupAdd(Set<GroupMember> groupMembers) {
+		// TODO 对每个成员已经加入群的消息
+		
+	}
 	
 	
 

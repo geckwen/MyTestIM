@@ -32,15 +32,7 @@ public class GroupCard {
     private LocalDateTime modifyAt;// 最后修改时间
 
     public GroupCard(GroupMember member) {
-        final Group group = member.getGroup();
-        this.id = group.getId();
-        this.name = group.getName();
-        this.desc = group.getDescription();
-        this.picture = group.getPicture();
-        this.ownerId = group.getOwner().getId();
-        this.notifyLevel = member.getNotifyLevel();
-        this.joinAt = member.getCreateAt();
-        this.modifyAt = group.getUpdateAt();
+    	this(member.getGroup(),member);
     }
 
     public GroupCard(Group group, GroupMember member) {
@@ -54,7 +46,11 @@ public class GroupCard {
         this.modifyAt = group.getUpdateAt();
     }
 
-    public String getId() {
+    public GroupCard(Group group) {
+		this(group, null);
+	}
+
+	public String getId() {
         return id;
     }
 

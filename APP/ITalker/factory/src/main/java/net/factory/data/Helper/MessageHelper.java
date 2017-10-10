@@ -1,5 +1,6 @@
 package net.factory.data.Helper;
 
+import com.raizlabs.android.dbflow.sql.language.OperatorGroup;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import net.factory.model.api.MessageCreateModel;
@@ -81,5 +82,27 @@ public class MessageHelper {
             }
         });
 
+    }
+
+    /**
+     * 查询一个消息,这个消息是这个群里最后一条消息
+     * @param groupId 群id
+     * @return 返回一条消息
+     */
+    public static Message findLastWithGroup(String groupId) {
+        return     SQLite.select().from(Message.class)
+                    .where(Message_Table.group_id.eq(groupId))
+                    .orderBy(Message_Table.createAt,false) //倒序查詢
+                    .querySingle();
+    }
+
+    public static Message findLastWithUser(String id) {
+        return    SQLite.select().from(Message.class)
+                .where(OperatorGroup.clause()
+                        .and(Message_Table.sender_id.eq(id))
+                        .and(Message_Table.group_id.isNull()))
+                .or(Message_Table.receiver_id.eq(id))
+                .orderBy(Message_Table.createAt,false) //正排序
+                .querySingle();
     }
 }

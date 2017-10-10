@@ -2,7 +2,7 @@ package net.qintalk.italker.push.factory;
 
 import org.hibernate.Session;
 
-import net.qintalk.italker.push.bean.api.account.MessageCreateModel;
+import net.qintalk.italker.push.bean.api.message.MessageCreateModel;
 import net.qintalk.italker.push.bean.db.Group;
 import net.qintalk.italker.push.bean.db.Message;
 import net.qintalk.italker.push.bean.db.User;

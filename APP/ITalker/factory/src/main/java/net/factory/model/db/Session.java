@@ -1,11 +1,16 @@
 package net.factory.model.db;
 
+import android.text.TextUtils;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import net.factory.data.Helper.ContactHelper;
+import net.factory.data.Helper.GroupHelper;
+import net.factory.data.Helper.MessageHelper;
 import net.factory.utils.DiffUiDataCallback;
 
 
@@ -174,10 +179,76 @@ public class Session extends BaseDbModel<Session>  {
      * @return 返回一个Session.Identify
      */
     public static Identify createSessionIdentify(Message message) {
-        return null;
+        Identify identify = new Identify();
+        if (message.getGroup() == null) {
+            identify.type = Message.RECEIVER_TYPE_NONE;
+            User other = message.getOther();
+            identify.id = other.getId();
+        } else {
+            identify.type = Message.RECEIVER_TYPE_GROUP;
+            identify.id = message.getGroup().getId();
+        }
+        return identify;
     }
 
     public void refreshNow() {
+        Message message;
+        if(receiverType==Message.RECEIVER_TYPE_GROUP)
+        {
+            message= MessageHelper.findLastWithGroup(id);
+           //如果没有基本信息
+            if(message==null){
+                if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+                    Group group = GroupHelper.findFromLocal(id);
+                    if(group!=null)
+                    {
+                        this.picture = group.getPicture();
+                        this.title = group.getName();
+                    }
+                    this.message=null;
+                    this.content = "";
+                    this.modifyAt=new Date(System.currentTimeMillis());
+                }else{
+                    //找到本地最后一条信息
+                    if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+                        Group group = message.getGroup();
+                        group.load();
+                        this.picture = group.getPicture();
+                        this.title = group.getName();
+                        this.message=message;
+                        this.content = message.getSampleContent();
+                        this.modifyAt=message.getCreateAt();
+                    }
+                }
+            }
+        }else{
+            message= MessageHelper.findLastWithUser(id);
+            //如果没有基本信息
+            if(message==null){
+                if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+                    User user = ContactHelper.findLocalUserById(id);
+                    if(user!=null)
+                    {
+                        this.picture = user.getPortrait();
+                        this.title = user.getName();
+                    }
+                    this.message=null;
+                    this.content = "";
+                    this.modifyAt=new Date(System.currentTimeMillis());
+                }else{
+                    //找到本地最后一条信息
+                    if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+                        User user = message.getOther();
+                        user.load();
+                        this.picture = user.getPortrait();
+                        this.title = user.getName();
+                        this.message=message;
+                        this.content = message.getSampleContent();
+                        this.modifyAt=message.getCreateAt();
+                    }
+                }
+
+        }
     }
 
 

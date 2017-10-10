@@ -1,4 +1,4 @@
-package net.qintalk.italker.push.bean.api.account;
+package net.qintalk.italker.push.bean.api.message;
 
 import java.time.LocalDateTime;
 

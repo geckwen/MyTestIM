@@ -176,7 +176,7 @@ public class ChatUserFragment extends ChatFragment<User> implements ChatContract
                         //这个尽可能完整
                         this.view.setContentScrim(resource.getCurrent());
                     }
-                })
+                });
 
     }
 }

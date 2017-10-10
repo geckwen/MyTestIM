@@ -26,7 +26,7 @@ import java.util.List;
 public abstract class BaseRespository<Model extends BaseDbModel>  implements DbDataSource<Model>
         ,DBHelper.ChangeListener<Model>,QueryTransaction.QueryResultListCallback<Model>{
     protected DataSource.SuccessCallback<List<Model>> callback ;
-    protected  List<Model> dataList = new LinkedList<>();
+    protected  LinkedList<Model> dataList = new LinkedList<>();
     protected Class<Model> dataClass;
 
     /**
@@ -136,7 +136,7 @@ public abstract class BaseRespository<Model extends BaseDbModel>  implements DbD
         dataList.remove(index);
         dataList.add(index,model);
     }
-    private void insert(Model model)
+    protected void insert(Model model)
     {
         dataList.add(model);
     }

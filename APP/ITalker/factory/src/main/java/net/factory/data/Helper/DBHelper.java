@@ -248,8 +248,8 @@ public class DBHelper {
                         {
                             session =new Session(identify);
                         }
-                        session.save();
                         session.refreshNow();
+                        adapter.save(session);
                         sessions[index++]=session;
                     }
                 //由于消息更新 需要重新刷新消息

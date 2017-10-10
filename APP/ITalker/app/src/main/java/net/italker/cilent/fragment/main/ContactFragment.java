@@ -95,7 +95,7 @@ public class ContactFragment extends PresentFragment<ContactContract.Present> im
         TextView mDes;
 
         public MyHolder(View itemView, AdapterCallBack adapterCallBack) {
-            super(itemView, adapterCallBack);
+            super(itemView);
         }
 
         @Override

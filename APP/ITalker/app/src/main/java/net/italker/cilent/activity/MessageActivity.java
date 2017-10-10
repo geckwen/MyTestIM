@@ -10,6 +10,8 @@ import net.common.app.BaseActivity;
 import net.common.app.BaseFragment;
 import net.common.model.Author;
 import net.factory.model.db.Group;
+import net.factory.model.db.Message;
+import net.factory.model.db.Session;
 import net.italker.cilent.R;
 import net.italker.cilent.fragment.message.ChatGroupFragment;
 import net.italker.cilent.fragment.message.ChatUserFragment;
@@ -54,6 +56,17 @@ public class MessageActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void show(Context context, Session data) {
+
+        if(context==null||data==null|| TextUtils.isEmpty(data.getId()))
+            return;
+        Intent intent = new Intent(context,MessageActivity.class);
+        intent.putExtra(KEY_RECEIVER_ID,data.getId());
+        intent.putExtra(KEY_RECEIVER_IS_GROUP,data.getReceiverType()== Message.RECEIVER_TYPE_GROUP);
+        context.startActivity(intent);
+
+    }
+
     @Override
     protected boolean initArgs(Bundle bundle) {
 
@@ -85,4 +98,6 @@ public class MessageActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.lay_container,fragment).commit();
     }
+
+
 }

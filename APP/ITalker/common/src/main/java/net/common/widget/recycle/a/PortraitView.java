@@ -50,7 +50,7 @@ public  class PortraitView extends CircleImageView {
     public void setPortraitView(RequestManager manage, String url,int res)
     {
             manage.load(url)
-                .placeholder(res)
+                .placeholder(res) //资源空间为null是的补充
                 .centerCrop()
                 .dontAnimate()  //不允许加载动画,因为这样会延迟画面
                 .into(this);

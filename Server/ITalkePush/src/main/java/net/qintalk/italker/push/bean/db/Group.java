@@ -4,6 +4,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import net.qintalk.italker.push.bean.api.group.GroupCreateModel;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -122,5 +124,17 @@ public class Group {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
+    }
+    
+    public Group(){
+    	
+    }
+    
+    public Group(User owner,GroupCreateModel model)
+    {
+    	this.owner = owner;
+    	this.name = model.getName();
+    	this.picture = model.getPortrait();
+    	this.description =model.getDes();
     }
 }

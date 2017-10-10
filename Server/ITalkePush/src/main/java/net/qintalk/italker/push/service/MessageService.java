@@ -8,8 +8,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import net.qintalk.italker.push.bean.api.account.MessageCreateModel;
 import net.qintalk.italker.push.bean.api.base.ResponseModel;
+import net.qintalk.italker.push.bean.api.message.MessageCreateModel;
 import net.qintalk.italker.push.bean.card.MessageCard;
 import net.qintalk.italker.push.bean.card.UserCard;
 import net.qintalk.italker.push.bean.db.Group;
