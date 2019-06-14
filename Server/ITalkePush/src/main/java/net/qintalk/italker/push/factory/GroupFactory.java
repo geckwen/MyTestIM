@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.metamodel.SetAttribute;
+
 import org.hibernate.Session;
 
 import net.qintalk.italker.push.bean.api.group.GroupCreateModel;
@@ -11,6 +13,7 @@ import net.qintalk.italker.push.bean.db.Group;
 import net.qintalk.italker.push.bean.db.GroupMember;
 import net.qintalk.italker.push.bean.db.User;
 import net.qintalk.italker.push.utils.Hib;
+import net.qintalk.italker.push.utils.TextUtil;
 import net.qintalk.italker.push.utils.Hib.Query;
 
 public class GroupFactory {
@@ -135,5 +138,65 @@ public class GroupFactory {
 		});
 		
 	}
+
+	public static Set<GroupMember> getMembers(User self) {
+		// TODO Auto-generated method stub
+		return Hib.query(new Query<Set<GroupMember>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public Set<GroupMember> query(Session session) {
+				List<GroupMember> groupMembers = session.createQuery("from GroupMember where userId=:userId")
+				.setParameter("userId", self.getId())
+				.list();
+				return new HashSet<>(groupMembers);
+			}
+			
+		});
+	}
+	
+	public static List<Group> search(String name) {
+		// TODO Auto-generated method stub
+		if(!TextUtil.StringNotEmpty(name))
+			name = "";
+		String searchName = "%"+name+"%";
+		return Hib.query(new Query<List<Group>>() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<Group> query(Session session) {
+				// 设置只能查询20条
+				return  session.createQuery("from Group where lower(name) like :name")
+				.setParameter("name", searchName)
+				.setMaxResults(20)
+				.list();
+				
+			}
+		});
+	}
+
+	
+	/**
+	 * 添加群用户成员
+	 * @param group 具体群
+	 * @param insertUsers 插入的群成员
+	 * @return
+	 */
+	public static Set<GroupMember> addMembers(Group group, List<User> insertUsers) {
+		// TODO Auto-generated method stub
+		return Hib.query(session->{
+			Set<GroupMember> groupMembers = new HashSet<>();
+			for(User user:insertUsers)
+			{
+				GroupMember groupMember = new GroupMember(user, group);
+				session.save(groupMember);
+				groupMembers.add(groupMember);
+			}
+			//进行数据刷新
+			
+			return groupMembers;
+		});
+	}
+
+	
 
 }

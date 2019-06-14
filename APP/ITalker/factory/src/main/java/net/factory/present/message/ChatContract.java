@@ -6,6 +6,9 @@ import net.common.factory.present.BaseContract;
 import net.factory.model.db.Group;
 import net.factory.model.db.Message;
 import net.factory.model.db.User;
+import net.factory.model.view.MemberUserModel;
+
+import java.util.List;
 
 /**
  * Created by CLW on 2017/10/3.
@@ -33,6 +36,9 @@ public interface ChatContract {
     }
     //群聊天的界面
     interface  GroupView extends View<Group>{
-
+        //显示管理员界面
+        void showAdminOption(boolean isAdmin);
+        //群信息界面
+        void onInitGroupMembers(List<MemberUserModel> members,int moreCount);
     }
 }

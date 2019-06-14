@@ -16,7 +16,8 @@ import retrofit2.Call;
  * Created by CLW on 2017/9/15.
  */
 
-public class UserPresent extends BasePresent<SearchContract.UserView> implements SearchContract.Present,DataSource.Callback<List<UserCard>> {
+public class UserPresent extends BasePresent<SearchContract.UserView>
+        implements SearchContract.Present,DataSource.Callback<List<UserCard>> {
 
     private Call searchCall;
 

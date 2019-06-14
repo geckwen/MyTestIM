@@ -1,9 +1,8 @@
 package net.common.app;
 
-import android.content.Context;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.annotation.StringRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 
 import net.common.R;
 import net.common.factory.present.BaseContract;
@@ -14,6 +13,7 @@ import net.common.factory.present.BaseContract;
 
 public abstract  class PresentToolBarActivity<Present extends BaseContract.Present> extends ToolBarActivity implements BaseContract.View<Present> {
     protected Present mPresent;
+    protected ProgressDialog mLoadingDialog;
 
     @Override
     protected void initBefore() {
@@ -40,6 +40,8 @@ public abstract  class PresentToolBarActivity<Present extends BaseContract.Prese
      */
     @Override
     public void showError(@StringRes int str) {
+        //隐藏自己
+        hideDiaLogLoading();
         if(mplaceHolderView!=null) {
             mplaceHolderView.triggerError(str);
         }else {
@@ -50,8 +52,37 @@ public abstract  class PresentToolBarActivity<Present extends BaseContract.Prese
     @Override
     public void showLoading() {
         //显示一个loading
-        if(mplaceHolderView!=null)
+        if(mplaceHolderView!=null) {
             mplaceHolderView.triggerLoading();
+        }
+        else {
+            ProgressDialog  progressDialog = mLoadingDialog;
+            if(progressDialog!=null)
+            {
+                progressDialog = new ProgressDialog(this,R.style.AppTheme_Dialog_Alert_Light);
+                //不可触摸取消
+                progressDialog.setCanceledOnTouchOutside(false);
+                //强制取消 关闭界面
+                progressDialog.setCancelable(true);
+                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        finish();
+                    }
+                });
+               mLoadingDialog = progressDialog;
+            }
+            progressDialog.setMessage(getText(R.string.prompt_loading));
+            progressDialog.show();
+        }
+    }
+
+    protected void hideDiaLogLoading(){
+        ProgressDialog  progressDialog = mLoadingDialog;
+        if(progressDialog!=null){
+            mLoadingDialog = null;
+            progressDialog.dismiss();
+        }
     }
 
     /**
@@ -59,6 +90,8 @@ public abstract  class PresentToolBarActivity<Present extends BaseContract.Prese
      */
     public void showHide()
     {
+        //不管如何 先隐藏
+        hideDiaLogLoading();
         if(mplaceHolderView!=null)
             mplaceHolderView.triggerOk();
     }

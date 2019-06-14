@@ -1,6 +1,7 @@
 package net.italker.cilent.fragment.message;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,9 +76,20 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
         mReceiverId =bundle.getString(MessageActivity.KEY_RECEIVER_ID);
     }
 
+    @LayoutRes
+    protected   abstract int getHeaderLayoutId();
 
     @Override
     public void initWidget(View root) {
+        //拿到占位布局
+        //替换布局
+        //防止控件异常
+        ViewStub stub = (ViewStub) root.findViewById(R.id.view_stub_header);
+        stub.setLayoutResource(getHeaderLayoutId());
+        stub.inflate();
+
+
+        //在这里进行控件绑定
         super.initWidget(root);
         initToolBar();
         initAppBar();
@@ -99,6 +112,11 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
                 getActivity().finish();
             }
         });
+    }
+
+    @Override
+    protected  final int getContentLayoutId() {
+        return R.layout.fragment_chat_common;
     }
 
     /**

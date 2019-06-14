@@ -22,6 +22,7 @@ import net.qintalk.italker.push.bean.card.UserCard;
 import net.qintalk.italker.push.bean.db.User;
 import net.qintalk.italker.push.bean.db.UserFollow;
 import net.qintalk.italker.push.bean.user.UpdateInfoModel;
+import net.qintalk.italker.push.factory.PushFactory;
 import net.qintalk.italker.push.factory.UserFactory;
 import net.qintalk.italker.push.utils.LocalUser;
 import net.qintalk.italker.push.utils.PushDispatcher;
@@ -112,12 +113,16 @@ public class UserService extends BaseService {
 		User target= UserFactory.findById(followId);
 		if(target==null)
 			return ResponseModel.buildNotFoundUserError("用户不存在");		
-		User user = UserFactory.follow(self, target);
-		if(user == null)
+		User followeUser = UserFactory.follow(self, target);
+		if(followeUser == null)
 			return ResponseModel.buildServiceError();
 		
-		//TODO 通知我关注的人 我已经关注了他
-		return ResponseModel.buildOk(new UserCard(user,true));
+		UserCard userCard = new UserCard(followeUser,true);
+		// 通知我关注的人 我已经关注了他
+		PushFactory.pushFollow(followeUser,new UserCard(self));
+		
+		
+		return ResponseModel.buildOk(userCard);
 	}
 	
 	//127.0.0.1/api/user/id

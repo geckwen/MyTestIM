@@ -5,9 +5,12 @@ import net.factory.model.api.account.AccountRsqModel;
 import net.factory.model.api.account.LoginModel;
 import net.factory.model.api.account.RegisterModel;
 import net.factory.model.base.RspModel;
+import net.factory.model.card.GroupCard;
+import net.factory.model.card.GroupMemberCard;
 import net.factory.model.card.MessageCard;
 import net.factory.model.card.UserCard;
-import net.factory.model.db.Message;
+import net.factory.model.group.GroupAddModel;
+import net.factory.model.group.GroupCreateModel;
 import net.factory.model.user.UpdateInfoModel;
 
 import java.util.List;
@@ -94,5 +97,54 @@ public interface RemoteService {
      */
     @POST("msg")
     Call<RspModel<MessageCard>> push(@Body MessageCreateModel messageCreateModel);
+
+    /**
+     * 创建群
+     * @return 返回 群card
+     */
+    @POST("group")
+    Call<RspModel<GroupCard>> groupCreate(@Body GroupCreateModel groupCreateModel);
+
+
+    /**
+     * 搜索群
+     * @param groupId 群id
+     * @return 返回一个群信息
+     */
+    @POST("group/{groupId}")
+    Call<RspModel<GroupCard>> groupFind(@Path("groupId")String groupId);
+
+    /**
+     * 搜索群
+     * @param name 群名字模糊匹配
+     * @return 群信息
+     */
+    @GET("group/search/{name}")
+    Call<RspModel<List<GroupCard>>> groupSearchByName(@Path(value = "name",encoded = true) String name);
+
+    /**
+     * 自己的群列表
+     * @param date 时间戳
+     * @return 群列表
+     */
+    @GET("group/list/{date}")
+    Call<RspModel<List<GroupCard>>> groups(@Path(value = "date",encoded = true)String date);
+
+    /**
+     * 群里成员的信息
+     * @param groupId 群Id
+     * @return 群的成员信息
+     */
+    @GET("group/{groupId}/members")
+    Call<RspModel<List<GroupMemberCard>>> groupMembers(@Path("groupId")String groupId);
+
+    /**
+     * 群成员添加
+     * @param groupId 群ID
+     * @param groupAddModel 被拉取的群成员信息
+     * @return 返回群成员信息
+     */
+    @POST("group/{groupId}/members")
+    Call<RspModel<List<GroupMemberCard>>> groupMembersAdd(@Path("groupId")String groupId, @Body GroupAddModel groupAddModel);
 
 }

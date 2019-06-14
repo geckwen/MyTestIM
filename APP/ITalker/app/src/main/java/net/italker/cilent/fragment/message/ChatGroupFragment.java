@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 
 import net.common.app.BaseFragment;
 import net.factory.model.db.Group;
+import net.factory.model.view.MemberUserModel;
 import net.factory.present.message.ChatContract;
 import net.factory.present.message.ChatGroupPresent;
 import net.italker.cilent.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,30 +33,27 @@ public class ChatGroupFragment extends ChatFragment<Group> implements ChatContra
         // Required empty public constructor
     }
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat_group, container, false);
+    protected int getHeaderLayoutId() {
+        return R.layout.lay_chat_header_group;
     }
+
+
 
     @Override
     protected ChatContract.Present initPresent() {
-        return new ChatGroupPresent(this);
+        return new ChatGroupPresent(mReceiverId,this);
     }
 
-    @Override
-    protected int getContentLayoutId() {
-        return R.layout.fragment_chat_group;
-    }
+
 
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
     }
+
+
 
     @Override
     protected void initEditContent() {
@@ -62,6 +62,16 @@ public class ChatGroupFragment extends ChatFragment<Group> implements ChatContra
 
     @Override
     public void init(Group group) {
+
+    }
+
+    @Override
+    public void showAdminOption(boolean isAdmin) {
+
+    }
+
+    @Override
+    public void onInitGroupMembers(List<MemberUserModel> members, int moreCount) {
 
     }
 }

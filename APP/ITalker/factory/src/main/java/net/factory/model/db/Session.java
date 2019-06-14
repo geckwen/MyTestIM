@@ -6,13 +6,10 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import net.factory.data.Helper.ContactHelper;
 import net.factory.data.Helper.GroupHelper;
 import net.factory.data.Helper.MessageHelper;
-import net.factory.utils.DiffUiDataCallback;
-
 
 import java.util.Date;
 import java.util.Objects;
@@ -193,73 +190,72 @@ public class Session extends BaseDbModel<Session>  {
 
     public void refreshNow() {
         Message message;
-        if(receiverType==Message.RECEIVER_TYPE_GROUP)
-        {
-            message= MessageHelper.findLastWithGroup(id);
-           //如果没有基本信息
-            if(message==null){
-                if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+        if (receiverType == Message.RECEIVER_TYPE_GROUP) {
+            message = MessageHelper.findLastWithGroup(id);
+            //如果没有基本信息
+            if (message == null) {
+                if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
                     Group group = GroupHelper.findFromLocal(id);
-                    if(group!=null)
-                    {
+                    if (group != null) {
                         this.picture = group.getPicture();
                         this.title = group.getName();
                     }
-                    this.message=null;
+                    this.message = null;
                     this.content = "";
-                    this.modifyAt=new Date(System.currentTimeMillis());
-                }else{
+                    this.modifyAt = new Date(System.currentTimeMillis());
+                } else {
                     //找到本地最后一条信息
-                    if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+                    if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
                         Group group = message.getGroup();
                         group.load();
                         this.picture = group.getPicture();
                         this.title = group.getName();
-                        this.message=message;
+                        this.message = message;
                         this.content = message.getSampleContent();
-                        this.modifyAt=message.getCreateAt();
+                        this.modifyAt = message.getCreateAt();
                     }
                 }
             }
-        }else{
-            message= MessageHelper.findLastWithUser(id);
+        } else {
+            message = MessageHelper.findLastWithUser(id);
             //如果没有基本信息
-            if(message==null){
-                if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+            if (message == null) {
+                if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
                     User user = ContactHelper.findLocalUserById(id);
-                    if(user!=null)
-                    {
+                    if (user != null) {
                         this.picture = user.getPortrait();
                         this.title = user.getName();
                     }
-                    this.message=null;
+                    this.message = null;
                     this.content = "";
-                    this.modifyAt=new Date(System.currentTimeMillis());
-                }else{
+                    this.modifyAt = new Date(System.currentTimeMillis());
+                } else {
                     //找到本地最后一条信息
-                    if(TextUtils.isEmpty(picture)||TextUtils.isEmpty(title)){
+                    if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
                         User user = message.getOther();
                         user.load();
                         this.picture = user.getPortrait();
                         this.title = user.getName();
-                        this.message=message;
+                        this.message = message;
                         this.content = message.getSampleContent();
-                        this.modifyAt=message.getCreateAt();
+                        this.modifyAt = message.getCreateAt();
                     }
                 }
 
+            }
         }
     }
 
+        /**
+         * 对于会话信息，最重要的部分进行提取
+         * 其中我们主要关注两个点：
+         * 一个会话最重要的是标示是和人聊天还是在群聊天；
+         * 所以对于这点：Id存储的是人或者群的Id
+         * 紧跟着Type：存储的是具体的类型（人、群）
+         * equals 和 hashCode 也是对两个字段进行判断
+         */
 
-    /**
-     * 对于会话信息，最重要的部分进行提取
-     * 其中我们主要关注两个点：
-     * 一个会话最重要的是标示是和人聊天还是在群聊天；
-     * 所以对于这点：Id存储的是人或者群的Id
-     * 紧跟着Type：存储的是具体的类型（人、群）
-     * equals 和 hashCode 也是对两个字段进行判断
-     */
+
     public static class Identify {
         public String id;
         public int type;

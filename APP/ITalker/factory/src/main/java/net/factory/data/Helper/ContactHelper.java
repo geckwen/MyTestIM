@@ -5,15 +5,15 @@ import android.util.Log;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import net.common.utils.CollectionUtil;
-
-import net.factory.model.db.User_Table;
-import net.factory.present.Factory;
 import net.factory.model.base.RspModel;
 import net.factory.model.card.UserCard;
 import net.factory.model.db.User;
-
+import net.factory.model.view.UserSampleModel;
+import net.factory.model.db.User_Table;
 import net.factory.net.NetWork;
 import net.factory.net.RemoteService;
+import net.factory.persistence.Account;
+import net.factory.present.Factory;
 
 import java.io.IOException;
 import java.util.List;
@@ -123,4 +123,24 @@ public class ContactHelper {
                 user = findLocalUserById(id);
             return  user;
         }
+
+
+    /**
+     * 拉取联系人
+     * @return 联系人
+     */
+        public static List<UserSampleModel> getContact(){
+            return SQLite.select(User_Table.id.withTable().as("id")
+                    , User_Table.name.withTable().as("name")
+                    ,User_Table.portrait.withTable().as("portrait"))
+                    .from(User.class)
+                    .where(User_Table.isFollow.eq(true))
+                    .and(User_Table.id.notEq(Account.getUserId()))
+                    .orderBy(User_Table.name,true)
+                    .limit(100) //最多查询100条数据
+                    //转换成这个格式
+                    .queryCustomList(UserSampleModel.class);
+        }
+
+
 }

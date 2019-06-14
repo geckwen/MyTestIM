@@ -20,7 +20,7 @@ public class ChatUserPresent extends ChatPresent<ChatContract.UserView> {
      * @param type
      */
 
-    private User receiver;
+
     public ChatUserPresent(ChatContract.UserView view, String receiverId) {
         super(new MessageRespository(receiverId),view, receiverId, Message.TYPE_STR);
     }
@@ -29,7 +29,7 @@ public class ChatUserPresent extends ChatPresent<ChatContract.UserView> {
     @Override
     public void start() {
         super.start();
-        receiver = ContactHelper.findLocalUserById(receiverId);
+       User receiver = ContactHelper.findLocalUserById(receiverId);
         getmView().init(receiver);
     }
 }

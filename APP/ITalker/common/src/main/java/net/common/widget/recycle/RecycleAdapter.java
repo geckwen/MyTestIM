@@ -256,10 +256,15 @@ implements View.OnClickListener,View.OnLongClickListener,AdapterCallBack<T>{
         private  AdapterCallBack adapterCallBack;
         protected T mData;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView,AdapterCallBack adapterCallBack) {
             super(itemView);
+            this.adapterCallBack=adapterCallBack;
         }
 
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+        }
 
 
         /** 用于绑定数据的触发

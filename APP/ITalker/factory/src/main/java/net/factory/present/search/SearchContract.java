@@ -1,6 +1,7 @@
 package net.factory.present.search;
 
 import net.common.factory.present.BaseContract;
+import net.factory.model.card.GroupCard;
 import net.factory.model.card.UserCard;
 
 import java.util.List;
@@ -17,6 +18,6 @@ public interface SearchContract {
         void onSearchDone(List<UserCard> userCards);
     }
     interface  GroupView extends  BaseContract.View<Present>{
-        void onSearchDone(List<UserCard> userCards);
+        void onSearchDone(List<GroupCard> groupCards);
     }
 }

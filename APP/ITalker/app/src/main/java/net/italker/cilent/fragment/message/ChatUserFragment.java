@@ -100,10 +100,7 @@ public class ChatUserFragment extends ChatFragment<User> implements ChatContract
         return new ChatUserPresent(this,mReceiverId);
     }
 
-    @Override
-    protected int getContentLayoutId() {
-        return R.layout.fragment_chat_user;
-    }
+
 
 
     /**
@@ -162,6 +159,11 @@ public class ChatUserFragment extends ChatFragment<User> implements ChatContract
         //对和你聊天的用户进行初始化
         mPortraitView.setPortraitView(Glide.with(ChatUserFragment.this),user);
         mCollapsingToolbarLayout.setTitle(user.getName());
+    }
+
+    @Override
+    protected int getHeaderLayoutId() {
+        return R.layout.lay_chat_header_user;
     }
 
     @Override

@@ -235,7 +235,8 @@ public class UserFactory {
 			//并推送一条消息
 			if(TextUtil.StringNotEmpty(user.getPushId()))
 			{
-				
+				// 推送一个推出消息
+				PushFactory.pushLogout(user,user.getId());
 			}
 			//进行更新设备ID
 			user.setPushId(pushId);

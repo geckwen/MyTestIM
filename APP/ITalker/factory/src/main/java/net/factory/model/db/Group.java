@@ -6,9 +6,14 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import net.factory.data.Helper.GroupHelper;
+import net.factory.model.view.MemberUserModel;
 import net.factory.utils.DiffUiDataCallback;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 /**群信息
@@ -35,7 +40,8 @@ public class Group extends BaseDbModel<Group> {
     @ForeignKey(tableClass = User.class,stubbedRelationship = true)
     private User owner;
 
-    private Object holder;
+    //预留字段 用于显示
+    public Object holder;
 
     public String getId() {
         return id;
@@ -135,5 +141,30 @@ public class Group extends BaseDbModel<Group> {
                         && Objects.equals(picture,old.getPicture())
                         && Objects.equals(holder, old.holder)
                 )     ;
+    }
+
+    private long groupMemberCount = -1;
+    public long getGroupMemberCount() {
+        if(groupMemberCount == -1)
+        {
+            //没有初始化
+            groupMemberCount = GroupHelper.getMemberCount(id);
+        }
+        return groupMemberCount;
+    }
+
+    private    List<MemberUserModel> groupLatetyModels;
+
+    /**
+     * 获取群成员信息 只获取四个
+     * @return
+     */
+    public  List<MemberUserModel> getLatetyGroupMember() {
+        if(groupLatetyModels == null || groupLatetyModels.isEmpty())
+        {
+            //加载简单的群成员信息,返回四条,最多
+            groupLatetyModels = GroupHelper.getMemberUser(id,4)
+        }
+        return userModels;
     }
 }

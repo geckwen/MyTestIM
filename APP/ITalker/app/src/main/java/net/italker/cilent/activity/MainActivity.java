@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,8 +62,7 @@ NavHelper.OnTabChangeListener<Integer>{
     //控制fragment跳转的
     NavHelper<Integer> mnavHelper;
 
-    //用于群和用户添加的type
-    private  int type;
+
 
     /**
      * 直接跳转
@@ -136,13 +134,13 @@ NavHelper.OnTabChangeListener<Integer>{
     {
         //在群界面搜索时,在顶部点击搜索按钮进入搜索
         //如果不是群界面,则默认为用户搜索
-        if(mnavHelper.getCurrentTab().extra.equals(R.id.action_group)) {
-            type = SearchActivity.TYPE_GROUP;
+        if(Objects.equals(mnavHelper.getCurrentTab().extra,"Group")) {
+            SearchActivity.show(this,SearchActivity.TYPE_GROUP);
         }else {
             //如果不是群操作全部视为user操作
-            type = SearchActivity.TYPE_USER;
+            SearchActivity.show(this,SearchActivity.TYPE_USER);
         }
-        SearchActivity.show(this,type);
+
 
     }
 
@@ -152,13 +150,16 @@ NavHelper.OnTabChangeListener<Integer>{
     @OnClick(R.id.btn_action)
     void onActivity()
     {
-        if(mnavHelper.getCurrentTab().extra.equals(R.id.action_group)) {
-            type = SearchActivity.TYPE_GROUP;
+        if(Objects.equals(mnavHelper.getCurrentTab().extra,"Group")) {
+            // 打开群创建界面
+            GroupCreateActivity.show(this);
+
         }else {
             //如果不是群操作全部视为user操作
-            type = SearchActivity.TYPE_USER;
+
+            SearchActivity.show(this, SearchActivity.TYPE_USER);
         }
-        SearchActivity.show(this,type);
+
     }
 
     /**

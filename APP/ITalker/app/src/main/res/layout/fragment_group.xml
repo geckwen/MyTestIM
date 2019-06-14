@@ -4,13 +4,19 @@
     android:layout_height="match_parent"
     tools:context="net.italker.cilent.fragment.main.GroupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/group_search_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="@dimen/len_80"
-        android:textColor="@color/black"
-        android:text="GTROP" />
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:padding="@dimen/len_4">
+    </android.support.v7.widget.RecyclerView>
+    <net.common.widget.recycle.EmptyView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </net.common.widget.recycle.EmptyView>
 
 </FrameLayout>

@@ -33,6 +33,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.igexin.push.core.g.R;
+
 
 public class UserSearchFragment extends PresentFragment<SearchContract.Present>
         implements SearchActivity.SearchFragment,SearchContract.UserView {
