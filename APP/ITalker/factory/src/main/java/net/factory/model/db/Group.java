@@ -163,8 +163,8 @@ public class Group extends BaseDbModel<Group> {
         if(groupLatetyModels == null || groupLatetyModels.isEmpty())
         {
             //加载简单的群成员信息,返回四条,最多
-            groupLatetyModels = GroupHelper.getMemberUser(id,4)
+            groupLatetyModels = GroupHelper.getMemberUser(id,4);
         }
-        return userModels;
+        return groupLatetyModels;
     }
 }

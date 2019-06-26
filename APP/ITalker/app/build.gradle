@@ -48,7 +48,8 @@ dependencies {
     compile "com.getui:sdk:$rootProject.ext.getuiVersion"
     compile "com.jakewharton:butterknife:$rootProject.ext.bufferknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.bufferknifeVersion"
-
+    //空气面板
+    compile "net.qiujuer.widget:airpanel:$rootProject.ext.airpanelVersion"
 
 
     compile project(':factory')

@@ -29,21 +29,18 @@ public class MessageGroupRespository extends BaseRespository<Message> implements
     @Override
     public void load(SuccessCallback<List<Message>> callback) {
         super.load(callback);
-        //TODO
-        //group==null和sendId==receiverId 或者 receiverId==receiverId
-        /*
-        SQLite.select().from(Message.class)
+        //group==null和sendId==receiverId 或者 receiverId==receiverId,groupid==receiverId
 
-                .where(OperatorGroup.clause()
-                        .and(Message_Table.sender_id.eq(receiverId))
-                        .and(Message_Table.group_id.isNull()))
+        SQLite.select()
+                .from(Message.class)
+                .where(Message_Table.group_id.eq(receiverId))
                 .or(Message_Table.receiver_id.eq(receiverId))
                 .orderBy(Message_Table.createAt,false) //正排序
                 .limit(30)
                 .async() // 异步调用
                 .queryListResultCallback(this)
                 .execute();
-        */
+
     }
 
     @Override
@@ -55,8 +52,11 @@ public class MessageGroupRespository extends BaseRespository<Message> implements
     }
 
     @Override
-    public boolean isRequired(Message model) {
-        //receiverId相对应的接收者ID
-        return false;
+    public boolean isRequired(Message message) {
+        //如果消息的Group不为空,则一定是发送到一个群的
+        //如果群ID等于我们需要的，那就通过
+        return message.getGroup()!=null
+                && receiverId.equalsIgnoreCase(message.getGroup().getId());
+
     }
 }

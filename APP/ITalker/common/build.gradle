@@ -36,7 +36,8 @@ dependencies {
     compile "de.hdodenhof:circleimageview:$rootProject.ext.circycleImageView"
     compile "com.jakewharton:butterknife:$rootProject.ext.bufferknifeVersion"
 
-
+    //空气面板
+    compile "net.qiujuer.widget:airpanel:$rootProject.ext.airpanelVersion"
     compile "net.qiujuer.genius:kit-handler:$rootProject.ext.geniusVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.bufferknifeVersion"
 

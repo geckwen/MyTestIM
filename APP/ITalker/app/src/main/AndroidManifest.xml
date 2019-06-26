@@ -58,18 +58,17 @@
             android:label="@string/title_activity_message"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Message"
+            android:windowSoftInputMode="adjustResize"
             />
         <activity
             android:name=".activity.PersonalActivity"
             android:label="@string/title_activity_personal"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransStatusBar" />
-
         <activity
             android:name=".activity.GroupCreateActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Group.Create"
-            />
+            android:theme="@style/AppTheme.Group.Create" />
         <!-- 个推的广播接收注册 -->
         <receiver
             android:name=".MessagerReceive"
@@ -81,7 +80,12 @@
             </intent-filter>
         </receiver>
 
-
+        <activity
+            android:name=".activity.GroupMemberActivity"
+            android:label="@string/title_member_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar"
+            ></activity>
     </application>
 
 </manifest>

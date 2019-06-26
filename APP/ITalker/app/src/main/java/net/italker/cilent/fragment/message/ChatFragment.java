@@ -27,7 +27,10 @@ import net.factory.persistence.Account;
 import net.factory.present.message.ChatContract;
 import net.italker.cilent.R;
 import net.italker.cilent.activity.MessageActivity;
+import net.italker.cilent.fragment.panel.PanelFragment;
 import net.qiujuer.genius.ui.widget.Loading;
+import net.qiujuer.widget.airpanel.AirPanel;
+import net.qiujuer.widget.airpanel.Util;
 
 import java.util.Objects;
 
@@ -53,6 +56,7 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
 
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
+
     @BindView(R.id.appbar)
     AppBarLayout  mAppBarLayout;
 
@@ -65,10 +69,16 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
     @BindView(R.id.btn_record)
     ImageView mRecord;
 
-    @BindView(R.id.btn_emoj)
+    @BindView(R.id.btn_face)
     ImageView mEmoj;
 
+
     private Adapter mAdapter;
+
+    //控制顶部面板与软键盘过渡的Boss控件
+    private  AirPanel.Boss mAirPanelBoss;
+
+    private PanelFragment mPanelFragment;
 
     @Override
     protected void initArgs(Bundle bundle) {
@@ -87,6 +97,17 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
         ViewStub stub = (ViewStub) root.findViewById(R.id.view_stub_header);
         stub.setLayoutResource(getHeaderLayoutId());
         stub.inflate();
+
+        //初始化面板操作
+        mAirPanelBoss  = (AirPanel.Boss) root.findViewById(R.id.lay_content);
+        mAirPanelBoss.setup(new AirPanel.PanelListener() {
+            @Override
+            public void requestHideSoftKeyboard() {
+                //请求隐藏软键盘
+                Util.hideKeyboard(mContent);
+            }
+        });
+        mPanelFragment = (PanelFragment) getChildFragmentManager().findFragmentById(R.id.frag_panel)
 
 
         //在这里进行控件绑定
@@ -182,12 +203,18 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
     void onRecord()
     {
         //TODO 录音
+        mAirPanelBoss.openPanel();
+        mPanelFragment.showRecord();
     }
 
-    @OnClick(R.id.btn_emoj)
-    void onEmoj()
-    {
 
+
+    @OnClick(R.id.btn_face)
+    void onFaceClick()
+    {
+        //仅仅只需请求打开即可
+        mAirPanelBoss.openPanel();
+        mPanelFragment.showFace();
     }
 
     @OnClick(R.id.btn_submit)
@@ -206,7 +233,8 @@ public  abstract class ChatFragment<initModel> extends PresentFragment<ChatContr
 
 
     void onMoreClick(){
-
+        mAirPanelBoss.openPanel();
+        mPanelFragment.showGallery();
     }
 
 
